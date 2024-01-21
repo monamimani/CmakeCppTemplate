@@ -1,32 +1,29 @@
-# Prerequisites
-*.d
+.vs
+.vscode
+.idea
+.venv
+.env
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json
 
-# Precompiled Headers
-*.gch
-*.pch
+bazel
+bazel-out
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+out
+_Out
+_Bin
+_BinIntermediate
+_Tmp
 
-# Fortran module files
-*.mod
-*.smod
+CPTCMakeBuild
+CompileCommands
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+ExternalsVcpkg
+ThirdpartyVcpkg
+packages
 
-# Executables
-*.exe
-*.out
-*.app
+CMakeUserPresets.json
+
+
+/vc140.pdb
