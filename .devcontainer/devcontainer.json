@@ -1,0 +1,22 @@
+{
+  "name": "CppDevContainer",
+  "image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "cmake.configureOnOpen": true,
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack"
+      ]
+    }
+  },
+  "onCreateCommand": {
+		"Set postCreate executable flag": "chmod +x .devcontainer/postCreate.sh"
+	},
+  "postCreateCommand": "sudo .devcontainer/postCreate.sh"
+
+}

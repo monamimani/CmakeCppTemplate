@@ -1,0 +1,181 @@
+{
+  "$schema": "https://cmake.org/cmake/help/v3.28/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "Common",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/_Out/build/${presetName}",
+      "installDir": "${sourceDir}/_Out/install/${presetName}",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "trace": {
+        "mode": "off",
+        "format": "human"
+      },
+      "cacheVariables": {}
+    },
+    {
+      "name": "Windows",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "ENABLE_CPPCHECK_DEFAULT": "FALSE",
+        "ENABLE_CLANG_TIDY_DEFAULT": "FALSE"
+      }
+    },
+    {
+      "name": "Linux",
+      "hidden": true,
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+        }
+      }
+    },
+    {
+      "name": "Vs2022",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "set"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "NinjaMultiConfig",
+      "hidden": true,
+      "generator": "Ninja Multi-Config"
+    },
+    {
+      "name": "Ninja",
+      "hidden": true,
+      "generator": "Ninja",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "toolset": {
+        "value": "x64",
+        "strategy": "external"
+      }
+    },
+    {
+      "name": "Msvc",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl",
+        "CMAKE_CXX_FLAGS": "/W4 /EHsc /MP /permissive- /Zc:preprocessor",
+        "CMAKE_C_FLAGS": "/W4 /EHsc /MP /permissive- /Zc:preprocessor"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "Clang-cl",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "windows-clang-x64"
+        }
+      }
+    },
+    {
+      "name": "Clang",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "Gcc",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_CXX_FLAGS": "-Wpedantic -Wall -Wextra",
+        "CMAKE_C_FLAGS": "-Wpedantic -Wall -Wextra"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "linux-gcc-x64"
+        }
+      }
+    },
+    {
+      // name should have this form
+      // %Platform%-%Compiler%-%Generator%-[%OtherConfigOptions,...%]-%BuildKind%
+      "name": "Linux-Clang-Ninja-Debug",
+      "inherits": [
+        "Common",
+        "Linux",
+        "Clang",
+        "Ninja"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_KIND": "DEBUG"
+      }
+    }
+  ],
+  "buildPresets": [] //,
+//"testPresets": [
+  //    {}
+  //],
+  // "packagePresets": [
+  //    {}
+  //],
+  // "workflowPresets": [
+  //    {}
+  //]
+}
