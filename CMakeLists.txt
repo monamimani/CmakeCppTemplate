@@ -11,35 +11,39 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 include(CMakePrintHelpers)
+include(CMake/PreventInSourceBuilds.cmake)
+include(CMake/ValidateVcpkgToolchain.cmake)
 
 cmake_print_variables(CMAKE_VERSION)
 # cmake_print_variables(CMAKE_MODULE_PATH)
 
-project(
-  %%template_project%%
+
+# get_filename_component(WorkspaceName ${CMAKE_SOURCE_DIR} NAME)
+# string(REPLACE " " "_" WorkspaceName ${WorkspaceName})
+
+project(TEMPLATE_PROJECT 
   VERSION 0.0.1
   DESCRIPTION ""
   HOMEPAGE_URL "%%template_url%%"
   LANGUAGES CXX C)
 
-include(CMake/PreventInSourceBuilds.cmake)
 include(CMakeProjectOptions.cmake)
-
-set(GIT_SHA
-    "Unknown"
-    CACHE STRING "SHA this build was generated from")
-string(
-  SUBSTRING "${GIT_SHA}"
-            0
-            8
-            GIT_SHORT_SHA)
 
 # add_library(myproject::myproject_options ALIAS myproject_options)
 # add_library(myproject::myproject_warnings ALIAS myproject_warnings)
 
-add_subdirectory(Projects)
-
-
+# If this project is consumed by another, don't setup tests.
 if(PROJECT_IS_TOP_LEVEL)
-  include(CTest)
+  enable_testing()
+
 endif()
+
+#add_subdirectory(Projects)
+
+file(GLOB PROJECT_CONTENTS LIST_DIRECTORIES true CONFIGURE_DEPENDS "Projects/*")
+foreach(ITEM ${PROJECT_CONTENTS})
+  if(IS_DIRECTORY ${ITEM})
+    file(RELATIVE_PATH FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/Projects/" ${ITEM})
+		add_subdirectory(Projects/${FOLDER})
+	endif()
+endforeach()

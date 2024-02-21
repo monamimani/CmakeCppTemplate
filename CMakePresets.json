@@ -13,8 +13,13 @@
       "binaryDir": "${sourceDir}/_Out/build/${presetName}",
       "installDir": "${sourceDir}/_Out/install/${presetName}",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "warnings": {
+        "uninitialized": true,
+        "dev": true,
+        "deprecated": true
+      },
       "trace": {
-        "mode": "off",
+        "mode": "on",
         "format": "human"
       },
       "cacheVariables": {}
@@ -124,12 +129,18 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang",
-        "CMAKE_CXX_COMPILER": "clang++"
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
       },
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "linux-clang-x64"
+        }
       }
     },
     {
@@ -168,7 +179,12 @@
       }
     }
   ],
-  "buildPresets": [] //,
+  "buildPresets": [
+    {
+      "name": "Linux-Clang-Ninja-Debug",
+      "configurePreset": "Linux-Clang-Ninja-Debug"
+    }
+  ] //,
 //"testPresets": [
   //    {}
   //],

@@ -1,12 +1,20 @@
-
 #!/bin/bash
-# Update and upgrade all system packages
+
 apt update
 apt upgrade -y
 
-  #apt install g++-12 -y
-  #echo export CC=gcc-12 CXX=g++-12 >> /etc/profile.d/set-compiler.sh
+echo "------------------------------"
+echo "Installing packages..."
+echo "------------------------------"
 
-echo "------------------------------"
-echo "Installing missing packages..."
-echo "------------------------------"
+pushd tmp/
+echo "Add CMake repo"
+wget https://apt.kitware.com/kitware-archive.sh
+chmod +x kitware-archive.sh
+sudo ./kitware-archive.sh
+
+popd
+sudo apt update
+
+echo "Install CMake"
+sudo apt install -y cmake

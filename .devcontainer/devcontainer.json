@@ -4,19 +4,26 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "cmake.configureOnOpen": true,
+        "cmake.configureOnOpen": false,
         "editor.formatOnSave": true
       },
       "extensions": [
         "ms-vscode.cmake-tools",
         "ms-vscode.cpptools",
-        "ms-vscode.cpptools-extension-pack"
+        "ms-vscode.cpptools-extension-pack",
+        "twxs.cmake"
       ]
     }
   },
   "onCreateCommand": {
-		"Set postCreate executable flag": "chmod +x .devcontainer/postCreate.sh"
-	},
-  "postCreateCommand": "sudo .devcontainer/postCreate.sh"
-
+    "Set postCreate executable flag": "chmod +x .devcontainer/postCreate.sh"
+  },
+  "postCreateCommand": "sudo .devcontainer/postCreate.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/git": {},
+    "ghcr.io/devcontainers/features/git-lfs": {},
+    "ghcr.io/devcontainers/features/powershell": {},
+    "ghcr.io/devcontainers-community/features/llvm": {},
+    "ghcr.io/devcontainers-contrib/features/sops:1": {},
+  }
 }
