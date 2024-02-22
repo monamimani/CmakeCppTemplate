@@ -99,6 +99,7 @@ macro(TEMPLATE_PROJECT_target_options)
     ${TEMPLATE_PROJECT_ENABLE_SANITIZER_MEMORY}
   )
 
+  target_compile_features(TEMPLATE_PROJECT_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
   set_target_properties(TEMPLATE_PROJECT_options PROPERTIES UNITY_BUILD ${TEMPLATE_PROJECT_ENABLE_UNITY_BUILD})
 
   include(CMake/StaticAnalyzers.cmake)

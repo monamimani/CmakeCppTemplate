@@ -178,7 +178,7 @@
       ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_KIND": "DEBUG"
+        "BUILD_KIND": "Dev"
       }
     }
   ],

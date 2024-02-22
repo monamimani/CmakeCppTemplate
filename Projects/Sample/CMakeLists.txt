@@ -52,6 +52,7 @@ target_sources(${targetName}
 )
 
 set(privateLibs
+  TEMPLATE_PROJECT::Config
 )
 
 target_link_libraries(${targetName}
