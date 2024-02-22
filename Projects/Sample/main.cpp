@@ -1,9 +1,12 @@
 #include <cstdlib>
 #include <print>
 
+#include "Sample/Sample.h"
+
 // NOLINTNEXTLINE(bugprone-exception-escape)
 int main()
 {
-  std::println("Hello World");
+  const auto value = Smpl::getAnswer();
+  std::println("Hello World, {}", value);
   return EXIT_SUCCESS;
 }
