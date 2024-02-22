@@ -7,7 +7,7 @@ echo "------------------------------"
 echo "Installing packages..."
 echo "------------------------------"
 
-pushd tmp/
+pushd /tmp/
 echo "Add CMake repo"
 wget https://apt.kitware.com/kitware-archive.sh
 chmod +x kitware-archive.sh

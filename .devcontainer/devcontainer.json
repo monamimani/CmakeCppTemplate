@@ -11,7 +11,7 @@
         "ms-vscode.cmake-tools",
         "ms-vscode.cpptools",
         "ms-vscode.cpptools-extension-pack",
-        "twxs.cmake"
+        "josetr.cmake-language-support-vscode"
       ]
     }
   },
@@ -23,7 +23,6 @@
     "ghcr.io/devcontainers/features/git": {},
     "ghcr.io/devcontainers/features/git-lfs": {},
     "ghcr.io/devcontainers/features/powershell": {},
-    "ghcr.io/devcontainers-community/features/llvm": {},
-    "ghcr.io/devcontainers-contrib/features/sops:1": {},
+    "ghcr.io/devcontainers-community/features/llvm": {}
   }
 }
