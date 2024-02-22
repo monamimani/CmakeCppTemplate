@@ -8,6 +8,11 @@
   },
   "configurePresets": [
     {
+      "name": "Preset-Name-Template",
+      "description": "%Platform%-%Compiler%-%Generator%-[%OtherConfigOptions,...%]-%BuildKind%",
+      "hidden": true
+    },
+    {
       "name": "Common",
       "hidden": true,
       "binaryDir": "${sourceDir}/_Out/build/${presetName}",
@@ -164,8 +169,6 @@
       }
     },
     {
-      // name should have this form
-      // %Platform%-%Compiler%-%Generator%-[%OtherConfigOptions,...%]-%BuildKind%
       "name": "Linux-Clang-Ninja-Debug",
       "inherits": [
         "Common",
@@ -184,14 +187,8 @@
       "name": "Linux-Clang-Ninja-Debug",
       "configurePreset": "Linux-Clang-Ninja-Debug"
     }
-  ] //,
-//"testPresets": [
-  //    {}
-  //],
-  // "packagePresets": [
-  //    {}
-  //],
-  // "workflowPresets": [
-  //    {}
-  //]
+  ],
+  "testPresets": [],
+  "packagePresets": [],
+  "workflowPresets": []
 }
