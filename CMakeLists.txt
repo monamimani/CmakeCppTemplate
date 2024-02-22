@@ -27,8 +27,9 @@ project(TEMPLATE_PROJECT
 
 include(CMakeProjectOptions.cmake)
 
-# add_library(myproject::myproject_options ALIAS myproject_options)
-# add_library(myproject::myproject_warnings ALIAS myproject_warnings)
+TEMPLATE_PROJECT_declare_options()
+TEMPLATE_PROJECT_global_options()
+TEMPLATE_PROJECT_target_options()
 
 # If this project is consumed by another, don't setup tests.
 if(PROJECT_IS_TOP_LEVEL)
