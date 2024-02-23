@@ -3,6 +3,8 @@
 apt update
 apt upgrade -y
 
+#apt-get install -y --no-install-recommends software-properties-common
+
 echo "------------------------------"
 echo "Installing packages..."
 echo "------------------------------"
