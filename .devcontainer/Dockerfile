@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04
 RUN apt-get update \
   apt-get upgrade -y \
   \
-  apt-get install -y --no-install-recommends software-properties-common \
+  sudo apt-get install -y --no-install-recommends software-properties-common \
   \
   echo "------------------------------" \
   echo "Installing packages..." \
