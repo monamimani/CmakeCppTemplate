@@ -42,8 +42,8 @@ jobs:
         with:
           # imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}-devcontainer
           # cacheFrom: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}-devcontainer
-          imageName: ghcr.io/MonAmiMani/templatetest-devcontainer
-          cacheFrom: ghcr.io/MonAmiMani/templatetest-devcontainer
+          imageName: ghcr.io/monamimani/templateTest-devcontainer
+          cacheFrom: ghcr.io/monamimani/templateTest-devcontainer
           push: always
 
   template-cleanup:
