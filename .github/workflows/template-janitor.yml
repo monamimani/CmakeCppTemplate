@@ -175,6 +175,7 @@ jobs:
           #  imageName: ghcr.io/${{env.DEVCONTAINER_PATH}}
           #  runCmd: |
         run: |
+            cmake --version
             cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             # Build it because we may have broken something in the cpp/h files
