@@ -3,7 +3,7 @@
 name: Template Repository Janitor
 
 on:
-  workflow_call:
+  workflow_dispatch:
   pull_request:
   release:
     types: [published]
@@ -141,20 +141,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Cpp
-        uses: aminya/setup-cpp@v1
-        with:
-          compiler: ${{ matrix.compiler }}
-
-          cmake: true
-          ninja: true
-          vcpkg: true
-          ccache: false
-          clangtidy: false
-          cppcheck: false
-          gcovr: false
-          opencppcoverage: false
-
       - name: Project Name
         uses: cardinalby/export-env-action@v2
         with:
@@ -255,21 +241,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Cpp
-        uses: aminya/setup-cpp@v1
-        with:
-          compiler: gcc
-
-          cmake: true
-          ninja: true
-          vcpkg: true
-          ccache: false
-          clangtidy: false
-          cppcheck: false
-          gcovr: false
-          opencppcoverage: false
-
 
       - name: Test simple configuration to make sure nothing broke (default compiler,cmake,developer_mode OFF)
         uses: devcontainers/ci@v0.3
