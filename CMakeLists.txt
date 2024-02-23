@@ -22,7 +22,7 @@ cmake_print_variables(CMAKE_VERSION)
 project(TEMPLATE_PROJECT
   VERSION 0.0.1
   DESCRIPTION ""
-  HOMEPAGE_URL "%%template_url%%"
+  HOMEPAGE_URL "%%TEMPLATE_URL%%"
   LANGUAGES CXX C)
 
 include(CMakeProjectOptions.cmake)
