@@ -39,6 +39,8 @@ jobs:
       - name: Lowercase Variables 
         run: |
           printenv
+          ls
+          git status
           echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY@L}-devcontainer" >> $GITHUB_ENV
 
@@ -81,6 +83,7 @@ jobs:
       - name: Get organization and project name 
         run: |
           printenv
+          git status
           #echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
           echo "NEW_ORG=${{ github.repository_owner }}" >> $GITHUB_ENV
