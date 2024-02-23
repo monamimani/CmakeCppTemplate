@@ -34,7 +34,7 @@ jobs:
 
       - name: Lowercase Variables 
         run: |
-          echo "REPO_OWNER=${ GITHUB_REPOSITORY_OWNER }" >> $GITHUB_ENV
+          echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
           echo "REPOSITORY=${GITHUB_REPOSITORY@L}" >> $GITHUB_ENV
 
       - name: Pre-build dev container image
