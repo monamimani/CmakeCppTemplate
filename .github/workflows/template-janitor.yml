@@ -17,7 +17,7 @@ permissions:
 
 env:
   TEMPLATES_PATH: ".github/template"
-  DEVCONTAINER_PATH_TEST: "${GITHUB_REPOSITORY}@L-devcontainer"
+  DEVCONTAINER_PATH_TEST: "$GITHUB_REPOSITORY@L-devcontainer"
 
 jobs:
   template-create-devcontainer:
@@ -78,9 +78,10 @@ jobs:
 
       - name: Get organization and project name 
         run: |
+          printenv
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${{ github.repository_owner }}/${{ github.event.repository.name }}-devcontainer" >> $GITHUB_ENV
-          echo "DEVCONTAINER_PATH=${DEVCONTAINER_PATH}@L" >> $GITHUB_ENV
+          echo "DEVCONTAINER_PATH=${DEVCONTAINER_PATH@L}" >> $GITHUB_ENV
           echo "NEW_ORG=${{ github.repository_owner }}" >> $GITHUB_ENV
           echo "NEW_PROJECT=${{ github.event.repository.name }}" >> $GITHUB_ENV
           echo "NEW_URL=${{ github.repositoryUrl }}" >> $GITHUB_ENV
