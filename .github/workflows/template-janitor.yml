@@ -130,7 +130,7 @@ jobs:
           cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
           # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
           # Build it because we may have broken something in the cpp/h files
-          cmake --build --preset _Linux-Clang-Ninja-Debug
+          cmake --build --preset Linux-Clang-Ninja-Debug
 
       - uses: EndBug/add-and-commit@v9
         # only commit and push if we are not a template project anymore!
