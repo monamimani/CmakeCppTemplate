@@ -2,6 +2,10 @@
 
 name: Template Repository Janitor
 
+defaults:
+  run:
+    shell: bash
+
 on:
   workflow_dispatch:
   pull_request:
@@ -76,7 +80,6 @@ jobs:
           packaging_maintainer_mode: ${{ matrix.basic_build_mode }}
 
       - name: Get organization and project name 
-        shell: bash
         run: |
           printenv
           echo "${BASH_VERSION}"
@@ -159,7 +162,6 @@ jobs:
         #with:
           #  imageName: ghcr.io/${{env.DEVCONTAINER_PATH}}
           #  runCmd: |
-        shell: bash
         run: |
             cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
@@ -208,7 +210,6 @@ jobs:
           packaging_maintainer_mode: ${{ matrix.basic_build_mode }}
 
       - name: Get organization and project name 
-        shell: bash
         run: |
           echo "${BASH_VERSION}"
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
