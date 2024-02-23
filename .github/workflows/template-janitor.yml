@@ -90,13 +90,12 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_repo_meta
         with:
-          route: GET /repos/{owner}/{repo}
+          route: GET /repos/${{ env.NEW_ORG }}/${{ env.NEW_PROJECT }}
+          #route: GET /repos/{owner}/{repo}
           # owner: ${{ env.NEW_ORG }}
           # repo: ${{ env.NEW_PROJECT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_REPOSITORY: ${{ github.NEW_PROJECT }}
-          INPUT_OWNER: ${{ github.NEW_ORG }}
 
       - name: Use testing variables if still a template
         if: fromJson(steps.get_repo_meta.outputs.data).is_template == true
@@ -226,9 +225,10 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_repo_meta
         with:
-          route: GET /repos/{owner}/{repo}
-          owner: ${{ env.NEW_ORG }}
-          repo: ${{ env.NEW_PROJECT }}
+          route: GET /repos/${{ env.NEW_ORG }}/${{ env.NEW_PROJECT }}
+          # route: GET /repos/{owner}/{repo}
+          # owner: ${{ env.NEW_ORG }}
+          # repo: ${{ env.NEW_PROJECT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
