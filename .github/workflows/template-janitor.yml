@@ -83,6 +83,7 @@ jobs:
 
       - name: Get organization and project name 
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           printenv
           git --version
           git status
