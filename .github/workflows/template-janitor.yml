@@ -21,7 +21,6 @@ permissions:
 
 env:
   TEMPLATES_PATH: ".github/template"
-  DEVCONTAINER_PATH_TEST: "${GITHUB_REPOSITORY}@L-devcontainer"
 
 jobs:
   template-create-devcontainer:
@@ -39,7 +38,7 @@ jobs:
 
       - name: Lowercase Variables 
         run: |
-          echo "${BASH_VERSION}"
+          printenv
           echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY@L}-devcontainer" >> $GITHUB_ENV
 
@@ -82,7 +81,6 @@ jobs:
       - name: Get organization and project name 
         run: |
           printenv
-          echo "${BASH_VERSION}"
           #echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
           echo "NEW_ORG=${{ github.repository_owner }}" >> $GITHUB_ENV
@@ -93,10 +91,12 @@ jobs:
         id: get_repo_meta
         with:
           route: GET /repos/{owner}/{repo}
-          owner: ${{ env.NEW_ORG }}
-          repo: ${{ env.NEW_PROJECT }}
+          # owner: ${{ env.NEW_ORG }}
+          # repo: ${{ env.NEW_PROJECT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_REPOSITORY: ${{ github.NEW_PROJECT }}
+          INPUT_OWNER: ${{ github.NEW_ORG }}
 
       - name: Use testing variables if still a template
         if: fromJson(steps.get_repo_meta.outputs.data).is_template == true
@@ -127,6 +127,7 @@ jobs:
 
       - name: Print diff after replacement
         run: |
+          ls
           # Exclude the README as that is checked separately!
           git diff ':!README.md'
           # following should not have any diffs
