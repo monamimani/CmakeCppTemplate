@@ -17,6 +17,7 @@ permissions:
 
 env:
   TEMPLATES_PATH: ".github/template"
+  DEVCONTAINER_PATH_TEST: "${GITHUB_REPOSITORY@L}-devcontainer"
 
 jobs:
   template-create-devcontainer:
@@ -48,6 +49,8 @@ jobs:
     name: Cleanup after create
     needs: [template-create-devcontainer]
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{env.DEVCONTAINER_PATH_TEST}}
     strategy:
       matrix:
         compiler:
