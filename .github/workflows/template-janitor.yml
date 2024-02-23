@@ -3,6 +3,7 @@
 name: Template Repository Janitor
 
 on:
+  workflow_call:
   pull_request:
   release:
     types: [published]
@@ -126,11 +127,14 @@ jobs:
           envFile: '.github/constants.env'
 
       - name: Test simple configuration to make sure nothing broke
-        run: |
-          cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
-          # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
-          # Build it because we may have broken something in the cpp/h files
-          cmake --build --preset Linux-Clang-Ninja-Debug
+        uses: devcontainers/ci@v0.3
+        #run: |
+        with:
+          runCmd: |
+            cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
+            # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
+            # Build it because we may have broken something in the cpp/h files
+            cmake --build --preset Linux-Clang-Ninja-Debug
 
       - uses: EndBug/add-and-commit@v9
         # only commit and push if we are not a template project anymore!
@@ -223,10 +227,13 @@ jobs:
 
 
         - name: Test simple configuration to make sure nothing broke (default compiler,cmake,developer_mode OFF)
-          run: |
-            cmake --preset Linux-Clang-Ninja-Debug -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
-            cmake --build --preset Linux-Clang-Ninja-Debug
-            # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
+          uses: devcontainers/ci@v0.3
+          #run: |
+          with:
+            runCmd: |
+              cmake --preset Linux-Clang-Ninja-Debug -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
+              cmake --build --preset Linux-Clang-Ninja-Debug
+              # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
 
         - uses: EndBug/add-and-commit@v9
           # only commit and push if we are a template and project name has changed
