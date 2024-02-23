@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         compiler:
-          - llvm
+          - llvm-18.1.0
         generator:
           - Ninja
         build_type:
