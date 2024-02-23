@@ -50,7 +50,7 @@ jobs:
     needs: [template-create-devcontainer]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/cmakecpptemplate-devcontainer
+      image: ghcr.io/monamimani/cmakecpptemplate-devcontainer
     strategy:
       matrix:
         compiler:
@@ -178,7 +178,7 @@ jobs:
     needs: [template-create-devcontainer]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/cmakecpptemplate-devcontainer
+      image: ghcr.io/monamimani/cmakecpptemplate-devcontainer
     strategy:
       matrix:
         compiler:
