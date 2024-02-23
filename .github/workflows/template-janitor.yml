@@ -38,10 +38,6 @@ jobs:
 
       - name: Lowercase Variables 
         run: |
-          printenv
-          ls -la
-          git --version
-          git status
           echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY@L}-devcontainer" >> $GITHUB_ENV
 
@@ -89,10 +85,6 @@ jobs:
 
       - name: Get organization and project name 
         run: |
-          printenv
-          git --version
-          git status
-          ls -la
           #echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
           echo "NEW_ORG=${{ github.repository_owner }}" >> $GITHUB_ENV
@@ -103,9 +95,6 @@ jobs:
         id: get_repo_meta
         with:
           route: GET /repos/${{ env.NEW_ORG }}/${{ env.NEW_PROJECT }}
-          #route: GET /repos/{owner}/{repo}
-          # owner: ${{ env.NEW_ORG }}
-          # repo: ${{ env.NEW_PROJECT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -138,7 +127,6 @@ jobs:
 
       - name: Print diff after replacement
         run: |
-          ls -la
           # Exclude the README as that is checked separately!
           git diff ':!README.md'
           # following should not have any diffs
@@ -175,7 +163,6 @@ jobs:
           #  imageName: ghcr.io/${{env.DEVCONTAINER_PATH}}
           #  runCmd: |
         run: |
-            cmake --version
             cmake --preset Linux-Clang-Ninja-Debug -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_SAFE_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             # Build it because we may have broken something in the cpp/h files
@@ -224,7 +211,6 @@ jobs:
 
       - name: Get organization and project name 
         run: |
-          echo "${BASH_VERSION}"
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
 
@@ -239,9 +225,6 @@ jobs:
         id: get_repo_meta
         with:
           route: GET /repos/${{ env.NEW_ORG }}/${{ env.NEW_PROJECT }}
-          # route: GET /repos/{owner}/{repo}
-          # owner: ${{ env.NEW_ORG }}
-          # repo: ${{ env.NEW_PROJECT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -263,12 +246,12 @@ jobs:
         run: |
           git diff
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v2 
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.repository_owner }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test simple configuration to make sure nothing broke (default compiler,cmake,developer_mode OFF)
         #uses: devcontainers/ci@v0.3

@@ -14,8 +14,8 @@ echo "Add CMake repo"
 wget https://apt.kitware.com/kitware-archive.sh
 chmod +x kitware-archive.sh
 sudo ./kitware-archive.sh
-
 popd
+
 sudo apt update
 
 echo "Install CMake"
