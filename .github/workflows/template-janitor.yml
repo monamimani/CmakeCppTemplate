@@ -17,7 +17,6 @@ on:
       - dev
 permissions:
   contents: write
-  packages: write
 
 env:
   TEMPLATES_PATH: ".github/template"
