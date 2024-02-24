@@ -1,0 +1,60 @@
+name: ci
+on:
+  pull_request:
+  release:
+    types: [published]
+  push:
+    tags:
+    branches:
+      - main
+      - develop
+
+#env:
+
+jobs:
+  build-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+      
+
+        include:
+          - enable_ipo: On
+          - enable_ipo: Off
+
+
+    steps:
+    - name: Debug
+      run: echo "os. ${{matrix.os}}, ipo. ${{matrix.enable_ipo}} "
+
+      # - uses: actions/checkout@v3
+
+      # - name: Setup Cache
+      #   uses: ./.github/actions/setup_cache
+      #   with:
+      #     compiler: ${{ matrix.compiler }}
+      #     build_type: ${{ matrix.build_type }}
+      #     packaging_maintainer_mode: ${{ matrix.packaging_maintainer_mode }}
+      #     generator: ${{ matrix.generator }}
+
+      # - name: Project Name
+      #   uses: cardinalby/export-env-action@v2
+      #   with:
+      #     envFile: '.github/constants.env'
+
+
+      # - name: CMake Configure
+      #   run: |
+      #     cmake --preset Linux-Clang-Ninja-Debug -DGIT_SHA:STRING=${{ github.sha }}
+
+      #     # cmake -S . -B ./build -G "${{matrix.generator}}" -D${{ env.PROJECT_NAME }}_ENABLE_IPO=${{matrix.enable_ipo }} -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
+
+      # - name: CMake Build
+      #   # Execute the build.  You can specify a specific target with "--target <NAME>"
+      #   run: |
+      #     cmake --build --preset Linux-Clang-Ninja-Debug
