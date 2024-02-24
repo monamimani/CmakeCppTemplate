@@ -201,6 +201,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set ownership
+        run: |
+          # this is to fix GIT not liking owner of the checkout dir
+          chown -R $(id -u):$(id -g) $PWD
+          #git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Setup Cache
         uses: ./.github/actions/setup_cache
         with:
