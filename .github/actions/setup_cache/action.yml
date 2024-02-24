@@ -26,10 +26,9 @@ runs:
           ~/.cache/pip
           ~/.ccache
           ./_Out/build/vcpkg_installed
-          ${{ env.HOME }}/.cache/vcpkg/archives
-          ${{ env.XDG_CACHE_HOME }}/vcpkg/archives
-          ${{ env.LOCALAPPDATA }}/vcpkg/archives
-          ${{ env.APPDATA }}/vcpkg/archives
+          ${{ env.VCPKG_DOWNLOADS}}
+          ${{ env.VCPKG_ROOT}}/archives
+          ${{ env.VCPKG_INSTALLATION_ROOT}}/archives
         key: ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}-${{ inputs.generator }}-${{ inputs.packaging_maintainer_mode }}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./vcpkg.json')}}
         restore-keys: |
           ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}
