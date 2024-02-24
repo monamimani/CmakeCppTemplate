@@ -14,15 +14,18 @@ on:
 
 jobs:
   build-test:
-    name: ${{matrix.os}}-${{matrix.enable_ipo}}-${{matrix.cmake_preset}}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
 
       matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
+        platform:
+          - Linux
+          - Windows
+        generator:
+          - Ninja
+          - "Ninja Multi-Config"
+          - Vs2022
         enable_ipo:
            - On
            - OFF  
@@ -30,10 +33,14 @@ jobs:
 
         include:
           - cmake_preset: Linux-Clang-Ninja-Debug
+          - platform: Linux
+            os: ubuntu-latest
+          - platform: Windows
+            os: windows-latest
 
 
     steps:
-    - name: Debug
+    - name: ${{matrix.os}}-${{matrix.platform}}-${{matrix.enable_ipo}}-${{matrix.generator}}
       run: echo "os. ${{matrix.os}}, ipo. ${{matrix.enable_ipo}} "
 
       # - uses: actions/checkout@v3
