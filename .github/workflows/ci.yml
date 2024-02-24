@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-test:
-    name: ${{matrix.os}-${{matrix.enable_ipo}}-${{matrix.cmake_preset}}
+    name: ${{matrix.os}}-${{matrix.enable_ipo}}-${{matrix.cmake_preset}}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
