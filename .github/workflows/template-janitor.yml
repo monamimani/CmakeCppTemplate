@@ -20,14 +20,13 @@ permissions:
 
 env:
   TEMPLATES_PATH: ".github/template"
-  CONTAINER_IMAGE: "ghcr.io/monamimani-builds/cpp-devcontainer"
 
 jobs:
   template-cleanup:
     name: Cleanup after create
     runs-on: ubuntu-latest
     container:
-      image: ${{env.CONTAINER_IMAGE}}
+      image: "ghcr.io/monamimani-builds/cpp-devcontainer"
 
     strategy:
       matrix:
@@ -159,7 +158,7 @@ jobs:
     name: Renames template when a new name is detected
     runs-on: ubuntu-latest
     container:
-      image: ${{env.CONTAINER_IMAGE}}
+      image: "ghcr.io/monamimani-builds/cpp-devcontainer"
     strategy:
       matrix:
         compiler:
