@@ -21,39 +21,14 @@ permissions:
 
 env:
   TEMPLATES_PATH: ".github/template"
+  CONTAINER_IMAGE: "ghcr.io/monamimani-builds/cpp-devcontainer"
 
 jobs:
-  template-create-devcontainer:
-    name: Create/Update the devcontainer
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Lowercase Variables 
-        run: |
-          echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
-          echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY@L}-devcontainer" >> $GITHUB_ENV
-
-      - name: Pre-build dev container image
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: ghcr.io/${{env.DEVCONTAINER_PATH}}
-          cacheFrom: ghcr.io/${{env.DEVCONTAINER_PATH}}
-          push: always
-
   template-cleanup:
     name: Cleanup after create
-    needs: [template-create-devcontainer]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/monamimani/cmakecpptemplate-devcontainer
+      image: ${{env.CONTAINER_IMAGE}}
 
     strategy:
       matrix:
@@ -183,10 +158,9 @@ jobs:
 
   template-rename:
     name: Renames template when a new name is detected
-    needs: [template-create-devcontainer]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/monamimani/cmakecpptemplate-devcontainer
+      image: ${{env.CONTAINER_IMAGE}}
     strategy:
       matrix:
         compiler:
