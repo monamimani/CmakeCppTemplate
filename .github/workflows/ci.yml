@@ -14,6 +14,7 @@ on:
 
 jobs:
   build-test:
+    name: ${{matrix.os}-${{matrix.enable_ipo}}-${{matrix.cmake_preset}}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -22,11 +23,13 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
-      
+        enable_ipo:
+           - On
+           - OFF  
+        
 
         include:
-          - enable_ipo: On
-          - enable_ipo: Off
+          - cmake_preset: Linux-Clang-Ninja-Debug
 
 
     steps:
