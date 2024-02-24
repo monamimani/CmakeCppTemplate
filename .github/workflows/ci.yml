@@ -30,7 +30,6 @@ jobs:
            - On
            - OFF  
         
-
         include:
           - cmake_preset: Linux-Clang-Ninja-Debug
           - platform: Linux
