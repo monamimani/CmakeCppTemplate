@@ -9,8 +9,36 @@
   "configurePresets": [
     {
       "name": "Preset-Name-Template",
-      "description": "%Platform%-%Compiler%-%Generator%-[%OtherConfigOptions,...%]-%BuildKind%",
+      "description": "%Platform%-%Compiler%-%Generator%-[%OtherConfigOptions,...%]-%BuildType%-%BuildKind%",
       "hidden": true
+    },
+    {
+      "name": "Dev",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_KIND": "Dev"
+      }
+    },
+    {
+      "name": "QA",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_KIND": "QA"
+      }
+    },
+    {
+      "name": "Profile",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_KIND": "Profile"
+      }
+    },
+    {
+      "name": "Shipping",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_KIND": "Shipping"
+      }
     },
     {
       "name": "Common",
@@ -102,8 +130,8 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "cl",
         "CMAKE_CXX_COMPILER": "cl",
-        "CMAKE_CXX_FLAGS": "/W4 /EHsc /MP /permissive- /Zc:preprocessor",
-        "CMAKE_C_FLAGS": "/W4 /EHsc /MP /permissive- /Zc:preprocessor"
+        "CMAKE_CXX_FLAGS": "/EHsc /MP",
+        "CMAKE_C_FLAGS": "/EHsc /MP"
       },
       "condition": {
         "type": "equals",
@@ -154,8 +182,8 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++",
-        "CMAKE_CXX_FLAGS": "-Wpedantic -Wall -Wextra",
-        "CMAKE_C_FLAGS": "-Wpedantic -Wall -Wextra"
+        "CMAKE_CXX_FLAGS": "",
+        "CMAKE_C_FLAGS": ""
       },
       "condition": {
         "type": "equals",
@@ -169,7 +197,7 @@
       }
     },
     {
-      "name": "Linux-Clang-Ninja-Debug",
+      "name": "Linux-Clang-Ninja-Debug-Dev",
       "inherits": [
         "Common",
         "Linux",
@@ -184,8 +212,8 @@
   ],
   "buildPresets": [
     {
-      "name": "Linux-Clang-Ninja-Debug",
-      "configurePreset": "Linux-Clang-Ninja-Debug"
+      "name": "Linux-Clang-Ninja-Debug-Dev",
+      "configurePreset": "Linux-Clang-Ninja-Debug-Dev"
     }
   ],
   "testPresets": [],

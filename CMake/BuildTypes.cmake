@@ -2,7 +2,7 @@ include_guard()
 
 set(BUILD_TYPES "Debug" "Release" "RelWithDebInfo")
 
-set(BUILD_KIND_LIST Dev QA Profile Shipping)
+set(BUILD_KIND_LIST "Dev" "QA" "Profile" "Shipping")
 set(BUILD_KIND "Dev" CACHE STRING "The kind of configuration for the build.")
 set_property(CACHE BUILD_KIND PROPERTY STRINGS ${BUILD_KIND_LIST})
 
