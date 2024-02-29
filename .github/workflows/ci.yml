@@ -44,10 +44,10 @@ jobs:
           
         include: # combinasions that are one off
           - platform: {name: Linux, os: ubuntu-latest}
-            # compiler: Clang
+            compiler: Clang
             generator: Ninja Multi-Config
-            # build_type: Debug
-            # build_kind: Dev
+            build_type: Debug
+            build_kind: Dev
           - platform: {name: Windows, os: windows-latest }
             compiler: Msvc
             generator: Vs2022
