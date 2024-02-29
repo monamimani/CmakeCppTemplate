@@ -59,14 +59,16 @@ jobs:
           - compiler: Clang-cl
           
         include: # combinasions that are one off
-          - platform: Linux 
-            os: ubuntu-latest
+          - platform: 
+              - name: Linux 
+                os: ubuntu-latest
             compiler: Clang
             generator: Ninja Multi-Config
             build_type: Debug
             build_kind: Dev
-          - platform: Windows 
-            os: windows-latest
+          - platform: 
+              - name: Windows 
+                os: windows-latest
             compiler: Msvc
             generator: Vs2022
             build_type: Debug
