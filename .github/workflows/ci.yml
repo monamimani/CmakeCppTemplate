@@ -57,8 +57,11 @@ jobs:
     
     name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
+    env:
+      CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+
     steps:
-    - name: Build
+    - name: Terminal echo
       env:
         CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: | 
@@ -70,24 +73,27 @@ jobs:
         echo "${{matrix.build_type}}"
         echo "${{matrix.build_kind}}"
 
-      # - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      # - name: Setup Cache
-      #   uses: ./.github/actions/setup_cache
-      #   with:
-      #     compiler: ${{ matrix.compiler }}
-      #     build_type: ${{ matrix.build_type }}
-      #     packaging_maintainer_mode: ${{ matrix.packaging_maintainer_mode }}
-      #     generator: ${{ matrix.generator }}
+    - name: Setup Cache
+      uses: ./.github/actions/setup_cache
+      with:
+        compiler: ${{ matrix.compiler }}
+        build_type: ${{ matrix.build_type }}
+        packaging_maintainer_mode: false
+        generator: ${{ matrix.generator }}
 
 
-      # - name: CMake Configure
-      #   run: |
-      #     cmake --preset Linux-Clang-Ninja-Debug -DGIT_SHA:STRING=${{ github.sha }}
+    - name: CMake Configure
+      run: |
+        cmake --preset $CMAKE_PRESET -DGIT_SHA:STRING=${{ github.sha }}
 
       #     # cmake -S . -B ./build -G "${{matrix.generator}}" -D${{ env.PROJECT_NAME }}_ENABLE_IPO=${{matrix.enable_ipo }} -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
 
-      # - name: CMake Build
-      #   # Execute the build.  You can specify a specific target with "--target <NAME>"
-      #   run: |
-      #     cmake --build --preset Linux-Clang-Ninja-Debug
+    - name: CMake Build
+      run: |
+        cmake --build --preset $CMAKE_PRESET
+
+    # - name: Tests
+    #   run: |
+    #     cmake --build --preset $CMAKE_PRESET
