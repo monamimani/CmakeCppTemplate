@@ -48,6 +48,10 @@ jobs:
           chown -R $(id -u):$(id -g) $PWD
           #git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
+          pushd "${VCPKG_ROOT}"
+          chown -R $(id -u):$(id -g) $PWD
+          popd
+
       - name: Setup Cache
         uses: ./.github/actions/setup_cache
         with:
