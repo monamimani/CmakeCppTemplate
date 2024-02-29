@@ -54,15 +54,16 @@ jobs:
           - compiler: Clang-cl
           
         include: # combinasions that are one off
-          - platform:
-            - name: Unix
+            - newProp: Hello
+          # - platform:
+          #   - name: Linux
             # generator: Ninja Multi-Config
           # - platform:
           #   - name: Windows
           #   generator: Vs2022
         
     
-    name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+    name: ${{matrix.newProp}}-${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
     - name: Build
