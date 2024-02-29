@@ -48,8 +48,12 @@ jobs:
           chown -R $(id -u):$(id -g) $PWD
           #git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-          pushd "${VCPKG_ROOT}"
+
+      - name: Update VCPKG
+        run: |
+          pushd "${env.VCPKG_ROOT}"
           chown -R $(id -u):$(id -g) $PWD
+          git pull --ff-only
           popd
 
       - name: Setup Cache
