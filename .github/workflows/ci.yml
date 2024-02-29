@@ -32,8 +32,6 @@ jobs:
           - Msvc
         generator:
           - Ninja
-          - Ninja Multi-Config
-          - Vs2022
         build_type:
           - Debug
           - Release
@@ -55,6 +53,13 @@ jobs:
           - compiler: Gcc
           - compiler: Clang-cl
           
+        include: # combinasions that are one off
+          - platform:
+            - name: Linux
+            generator: Ninja Multi-Config
+          - platform:
+            - name: Windows
+            generator: Vs2022
         
     
     name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
