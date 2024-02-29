@@ -30,9 +30,9 @@ jobs:
         build_kind: [Dev, QA, Profile, Shipping]
 
         exclude: #Becasue they don't make sense or no Cmake preset created.
-          - platform: {name: Linux, os: ubuntu-latest}
+          - platform: {name: Linux}
             compiler: Msvc
-          - platform: {name: Windows, os: windows-latest }
+          - platform: {name: Windows}
             compiler: Clang
           - build_kind: QA
             build_type: Debug
