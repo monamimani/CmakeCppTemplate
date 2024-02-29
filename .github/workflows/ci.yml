@@ -5,7 +5,6 @@ on:
   release:
     types: [published]
   push:
-    tags:
     branches:
       - main
       - dev
@@ -14,21 +13,30 @@ on:
 
 jobs:
   build-test:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
 
+      # CMake preset name template: "%Platform%-%Compiler%-%Generator%-%BuildType%-%BuildKind%"
       matrix:
         platform:
           - Linux
           - Windows
+        compiler:
+          - Clang
+          - Msvc
         generator:
           - Ninja
           - "Ninja Multi-Config"
           - Vs2022
-        enable_ipo:
-           - On
-           - OFF  
+        build_type:
+          - Debug
+          - Release
+        build_kind:
+          - Dev
+          - QA
+          - Shipping
         
         include:
           - cmake_preset: Linux-Clang-Ninja-Debug
@@ -39,8 +47,10 @@ jobs:
 
 
     steps:
-    - name: ${{matrix.os}}-${{matrix.platform}}-${{matrix.enable_ipo}}-${{matrix.generator}}
-      run: echo "os. ${{matrix.os}}, ipo. ${{matrix.enable_ipo}} "
+    - name: ${{cmake_preset}}
+      run: echo "cmake preset ${{cmake_preset}}"
+      env:
+        cmake_preset: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
       # - uses: actions/checkout@v3
 
@@ -51,11 +61,6 @@ jobs:
       #     build_type: ${{ matrix.build_type }}
       #     packaging_maintainer_mode: ${{ matrix.packaging_maintainer_mode }}
       #     generator: ${{ matrix.generator }}
-
-      # - name: Project Name
-      #   uses: cardinalby/export-env-action@v2
-      #   with:
-      #     envFile: '.github/constants.env'
 
 
       # - name: CMake Configure
