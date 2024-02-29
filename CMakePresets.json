@@ -267,7 +267,7 @@
         "Common",
         "Windows",
         "Msvc",
-        "NinjaMVs2022ultiConfig"
+        "Vs2022"
       ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -326,7 +326,6 @@
         "BUILD_KIND": "Shipping"
       }
     }
-    
   ],
   "buildPresets": [
     {
@@ -344,7 +343,7 @@
     {
       "name": "Linux-Clang-Ninja-Release-QA",
       "configurePreset": "Linux-Clang-Ninja-Release-QA"
-    },  
+    },
     {
       "name": "Linux-Clang-Ninja-Release-Shipping",
       "configurePreset": "Linux-Clang-Ninja-Release-Shipping"
@@ -364,7 +363,7 @@
     {
       "name": "Windows-Msvc-Ninja-Release-QA",
       "configurePreset": "Windows-Msvc-Ninja-Release-QA"
-    },   
+    },
     {
       "name": "Windows-Msvc-Ninja-Release-Shipping",
       "configurePreset": "Windows-Msvc-Ninja-Release-Shipping"

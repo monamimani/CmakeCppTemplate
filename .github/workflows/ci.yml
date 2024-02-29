@@ -14,9 +14,9 @@ on:
 jobs:
   build-test:
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.platform.os }}
     env:
-      cmake_preset: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+      CMAKE_PRESET: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
     strategy:
       fail-fast: false
 
@@ -51,10 +51,8 @@ jobs:
 
 
     steps:
-    - name: ${{cmake_preset}}
-      run: echo "cmake preset ${{cmake_preset}}"
-      env:
-        cmake_preset: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+    - name: $CMAKE_PRESET
+      run: echo "cmake preset $CMAKE_PRESET"
 
       # - uses: actions/checkout@v3
 
