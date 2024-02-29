@@ -73,7 +73,11 @@ jobs:
         CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: | 
         echo "cmake preset $CMAKE_PRESET"
-        echo "${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}"
+        echo "${{matrix.platform.name}}"
+        echo "${{matrix.compiler}}"
+        echo "${{matrix.generator}}"
+        echo "${{matrix.build_type}}"
+        echo "${{matrix.build_kind}}"
 
       # - uses: actions/checkout@v3
 
