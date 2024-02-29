@@ -15,8 +15,6 @@ jobs:
   build-test:
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ${{ matrix.platform.os }}
-    env:
-      CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
     strategy:
       fail-fast: false
 
@@ -40,11 +38,26 @@ jobs:
         build_kind:
           - Dev
           - QA
+          - Profile
           - Shipping
 
+        exclude:
+          - platform.name: Windows
+            compiler: Clang
+          - build_kind: QA
+            build_type: Debug
+          - build_kind: Shipping
+            build_type: Debug
+          - build_kind: Profile
+          
+        
+    
+    name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
-    - name: $CMAKE_PRESET
+    - name: Build
+      env:
+        CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: echo "cmake preset $CMAKE_PRESET"
 
       # - uses: actions/checkout@v3
