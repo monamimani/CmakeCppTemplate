@@ -73,16 +73,16 @@ jobs:
             build_kind: Dev
         
     
-    # name: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+    name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
     - name: Build
       env:
-        CMAKE_PRESET: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+        CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: | 
         echo "cmake preset $CMAKE_PRESET"
-        echo "${{matrix.platform}}"
-        echo "${{matrix.os}}"
+        echo "${{matrix.platform.name}}"
+        echo "${{matrix.platform.os}}"
         echo "${{matrix.compiler}}"
         echo "${{matrix.generator}}"
         echo "${{matrix.build_type}}"
