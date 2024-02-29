@@ -23,12 +23,12 @@ function InvokeVcVarsAll {
 }
 
 function LaunchVsDevShell {
-  Get-ChildItem env:
+  #Get-ChildItem env:
   $vsPath = GetVsInstallationPath
   $vcvarsallPath = [IO.Path]::Combine($vsPath, "Common7", "Tools", "Launch-VsDevShell.ps1")
-  write-output($vcvarsallPath)
+  #write-output($vcvarsallPath)
   & $vcvarsallPath -Arch amd64 -SkipAutomaticLocation
-  Get-ChildItem env:
+  #Get-ChildItem env:
 }
 
 function GetVsInstallationPath {
