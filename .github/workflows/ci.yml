@@ -47,7 +47,7 @@ jobs:
         include: # combinasions that are one off
           - platform: {name: Linux, os: ubuntu-latest}
             compiler: Clang
-            generator: Ninja Multi-Config
+            generator: NinjaMultiConfig
             build_type: Debug
             build_kind: Dev
           - platform: {name: Windows, os: windows-latest }
