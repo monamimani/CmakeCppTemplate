@@ -90,7 +90,7 @@ jobs:
 
         if(${{runner.os == 'Windows'}})
         {
-          & { . Scripts\Build\VsEnvironment.ps1; LauncheVsDevShell }
+          & { . Scripts\Build\VsEnvironment.ps1; LaunchVsDevShell }
         }
         dir env:
         cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
