@@ -21,38 +21,18 @@ jobs:
       # CMake preset name template: "%Platform%-%Compiler%-%Generator%-%BuildType%-%BuildKind%"
       matrix:
         platform: [
-          {
-            name: Linux,
-            os: ubuntu-latest
-          },
-          {
-            name: Windows,
-            os: windows-latest
-          }]
-        compiler:
-          - Gcc
-          - Clang
-          - Clang-cl
-          - Msvc
-        generator:
-          - Ninja
-        build_type:
-          - Debug
-          - Release
-        build_kind:
-          - Dev
-          - QA
-          - Profile
-          - Shipping
+          {name: Linux, os: ubuntu-latest},
+          {name: Windows, os: windows-latest }
+          ]
+        compiler: [ Gcc, Clang, Clang-cl, Msvc]
+        generator: [Ninja]
+        build_type: [Debug, Release]
+        build_kind: [Dev, QA, Profile, Shipping]
 
         exclude: #Becasue they don't make sense or no Cmake preset created.
-          - platform:
-              name: Linux,
-              os: ubuntu-latest
+          - platform: {name: Linux, os: ubuntu-latest}
             compiler: Msvc
-          - platform:
-              name: Windows,
-              os: windows-latest
+          - platform: {name: Windows, os: windows-latest }
             compiler: Clang
           - build_kind: QA
             build_type: Debug
