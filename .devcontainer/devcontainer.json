@@ -1,13 +1,6 @@
 {
   "name": "CppDevContainer",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "runArgs": [
-    "--cap-add=SYS_PTRACE",
-    "--security-opt",
-    "seccomp=unconfined"
-  ],
+  "image": "ghcr.io/monamimani-builds/cpp-devcontainer",
   "customizations": {
     "vscode": {
       "settings": {
@@ -24,10 +17,6 @@
       ]
     }
   },
-  // "onCreateCommand": {
-  //   "Set postCreate executable flag": "chmod +x .devcontainer/postCreate.sh"
-  // },
-  // "postCreateCommand": "sudo .devcontainer/postCreate.sh",
   "features": {
     "ghcr.io/devcontainers/features/git": {},
     "ghcr.io/devcontainers/features/git-lfs": {},
