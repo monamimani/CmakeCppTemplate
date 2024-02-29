@@ -54,7 +54,7 @@ jobs:
           - compiler: Clang-cl
           
         include: # combinasions that are one off
-            - newProp: Hello
+            - build_type: Hello
               generator: Vs2022
           # - platform:
           #   - name: Linux
