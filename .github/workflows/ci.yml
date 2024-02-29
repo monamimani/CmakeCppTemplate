@@ -55,8 +55,8 @@ jobs:
           
         include: # combinasions that are one off
           - platform:
-            - name: Linux
-            generator: Ninja Multi-Config
+            - name: Unix
+            # generator: Ninja Multi-Config
           # - platform:
           #   - name: Windows
           #   generator: Vs2022
