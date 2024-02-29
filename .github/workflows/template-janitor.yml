@@ -223,7 +223,6 @@ jobs:
         run: |
             cmake --preset Linux-Clang-Ninja-Debug-Dev -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             cmake --build --preset Linux-Clang-Ninja-Debug-Dev 
-            # cmake -S . -B ./_Out -G "${{ matrix.generator }}" -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
 
       - uses: EndBug/add-and-commit@v9
         # only commit and push if we are a template and project name has changed

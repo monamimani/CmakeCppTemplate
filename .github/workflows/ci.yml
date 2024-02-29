@@ -110,11 +110,9 @@ jobs:
 
         cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 
-      #     # cmake -S . -B ./build -G "${{matrix.generator}}" -D${{ env.PROJECT_NAME }}_ENABLE_IPO=${{matrix.enable_ipo }} -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
-
     - name: CMake Build
       run: |
-        cmake --build --preset $CMAKE_PRESET
+        cmake --build --preset ${{env.CMAKE_PRESET}}
 
     # - name: Tests
     #   run: |
