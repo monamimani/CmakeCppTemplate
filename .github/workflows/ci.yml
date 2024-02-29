@@ -20,11 +20,15 @@ jobs:
 
       # CMake preset name template: "%Platform%-%Compiler%-%Generator%-%BuildType%-%BuildKind%"
       matrix:
-        platform: 
-          - name: Linux
+        platform: [
+          {
+            name: Linux,
             os: ubuntu-latest
-          - name: Windows
+          },
+          {
+            name: Windows,
             os: windows-latest
+          }]
         compiler:
           - Gcc
           - Clang
