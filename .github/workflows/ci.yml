@@ -20,11 +20,9 @@ jobs:
 
       # CMake preset name template: "%Platform%-%Compiler%-%Generator%-%BuildType%-%BuildKind%"
       matrix:
-        platform:
-          - name: Linux
-            os: ubuntu-latest
-          - name: Windows
-            os: windows-latest
+        platform: 
+          - Linux
+          - Windows
         compiler:
           - Gcc
           - Clang
@@ -54,21 +52,22 @@ jobs:
           - compiler: Clang-cl
           
         include: # combinasions that are one off
-          - platform:
-            - name: Linux
-            - os: ubuntu-latest
+          - platform: Linux
+            os: ubuntu-latest
+          - platform: Linux 
             generator: Ninja Multi-Config
         
     
-    # name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+    # name: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
     - name: Build
       env:
-        CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+        CMAKE_PRESET: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: | 
         echo "cmake preset $CMAKE_PRESET"
-        echo "${{matrix.platform.name}}"
+        echo "${{matrix.platform}}"
+        echo "${{matrix.os}}"
         echo "${{matrix.compiler}}"
         echo "${{matrix.generator}}"
         echo "${{matrix.build_type}}"
