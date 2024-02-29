@@ -55,6 +55,7 @@ jobs:
           
         include: # combinasions that are one off
             - newProp: Hello
+              generator: Ninja Multi-Config
           # - platform:
           #   - name: Linux
             # generator: Ninja Multi-Config
