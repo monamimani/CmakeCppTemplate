@@ -43,11 +43,13 @@ jobs:
 
         exclude: #Becasue they don't make sense or no Cmake preset created.
           - platform:
-            - name: Windows
-            compiler: Clang
-          - platform:
             - name: Linux
+              os: ubuntu-latest
             compiler: Msvc
+          - platform:
+            - name: Windows
+              os: windows-latest
+            compiler: Clang
           - build_kind: QA
             build_type: Debug
           - build_kind: Shipping
