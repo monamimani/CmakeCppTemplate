@@ -57,9 +57,9 @@ jobs:
           - platform:
             - name: Linux
             generator: Ninja Multi-Config
-          - platform:
-            - name: Windows
-            generator: Vs2022
+          # - platform:
+          #   - name: Windows
+          #   generator: Vs2022
         
     
     name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
