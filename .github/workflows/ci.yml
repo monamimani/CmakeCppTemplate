@@ -16,7 +16,7 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ${{ matrix.platform.os }}
     env:
-      CMAKE_PRESET: ${{matrix.platform}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+      CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
     strategy:
       fail-fast: false
 
@@ -41,13 +41,6 @@ jobs:
           - Dev
           - QA
           - Shipping
-        
-        include:
-          - cmake_preset: Linux-Clang-Ninja-Debug
-          - platform: Linux
-            os: ubuntu-latest
-          - platform: Windows
-            os: windows-latest
 
 
     steps:
