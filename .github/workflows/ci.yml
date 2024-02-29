@@ -30,7 +30,7 @@ jobs:
           - Msvc
         generator:
           - Ninja
-          - "Ninja Multi-Config"
+          - Ninja Multi-Config
           - Vs2022
         build_type:
           - Debug
