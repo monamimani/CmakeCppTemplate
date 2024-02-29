@@ -55,7 +55,8 @@ jobs:
           
         include: # combinasions that are one off
           - platform:
-              - name: Test
+            - name: Test
+            - os: ubuntu-latest
           # - platform:
           #   - name: Linux
             # generator: Ninja Multi-Config
