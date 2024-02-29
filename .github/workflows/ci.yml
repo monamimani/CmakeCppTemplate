@@ -54,7 +54,7 @@ jobs:
           - compiler: Clang-cl
           
         include: # combinasions that are one off
-          - build_type: Hello
+          - build_type: Debug
             generator: Vs2022
           # - platform:
           #   - name: Linux
