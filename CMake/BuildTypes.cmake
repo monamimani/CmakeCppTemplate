@@ -33,6 +33,6 @@ else()
     FORCE)
 
   if(NOT $<CONFIG:cfgs> IN_LIST BUILD_TYPES)
-    message(FATAL_ERROR "CMAKE_CONFIGURATION_TYPES is $$<CONFIG:cfgs> and it must be one of ${BUILD_TYPES}")
+    message(FATAL_ERROR "CMAKE_CONFIGURATION_TYPES is $<CONFIG:cfgs> and it must be one of ${BUILD_TYPES}")
   endif()
 endif()
