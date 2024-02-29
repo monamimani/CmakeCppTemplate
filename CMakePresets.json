@@ -262,7 +262,7 @@
       }
     },
     {
-      "name": "Windows-Clang-Vs2022-Debug-Dev",
+      "name": "Windows-Msvc-Vs2022-Debug-Dev",
       "inherits": [
         "Common",
         "Windows",
@@ -344,38 +344,30 @@
     {
       "name": "Linux-Clang-Ninja-Release-QA",
       "configurePreset": "Linux-Clang-Ninja-Release-QA"
-    },
-    {
-      "name": "Linux-Clang-Ninja-Release-QA",
-      "configurePreset": "Linux-Clang-Ninja-Release-QA"
-    },    
+    },  
     {
       "name": "Linux-Clang-Ninja-Release-Shipping",
       "configurePreset": "Linux-Clang-Ninja-Release-Shipping"
     },
     {
-      "name": "Windows-Clang-Vs2022-Debug-Dev",
-      "configurePreset": "Windows-Clang-Vs2022-Debug-Dev"
+      "name": "Windows-Msvc-Vs2022-Debug-Dev",
+      "configurePreset": "Windows-Msvc-Vs2022-Debug-Dev"
     },
     {
-      "name": "Windows-Clang-Ninja-Debug-Dev",
-      "configurePreset": "Windows-Clang-Ninja-Debug-Dev"
+      "name": "Windows-Msvc-Ninja-Debug-Dev",
+      "configurePreset": "Windows-Msvc-Ninja-Debug-Dev"
     },
     {
-      "name": "Windows-Clang-Ninja-Release-Dev",
-      "configurePreset": "Windows-Clang-Ninja-Release-Dev"
+      "name": "Windows-Msvc-Ninja-Release-Dev",
+      "configurePreset": "Windows-Msvc-Ninja-Release-Dev"
     },
     {
-      "name": "Windows-Clang-Ninja-Release-QA",
-      "configurePreset": "Windows-Clang-Ninja-Release-QA"
-    },
+      "name": "Windows-Msvc-Ninja-Release-QA",
+      "configurePreset": "Windows-Msvc-Ninja-Release-QA"
+    },   
     {
-      "name": "Windows-Clang-Ninja-Release-QA",
-      "configurePreset": "Windows-Clang-Ninja-Release-QA"
-    },    
-    {
-      "name": "Windows-Clang-Ninja-Release-Shipping",
-      "configurePreset": "Windows-Clang-Ninja-Release-Shipping"
+      "name": "Windows-Msvc-Ninja-Release-Shipping",
+      "configurePreset": "Windows-Msvc-Ninja-Release-Shipping"
     }
   ],
   "testPresets": [],
