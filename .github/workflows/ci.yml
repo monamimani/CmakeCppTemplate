@@ -64,10 +64,8 @@ jobs:
 
     steps:
     - name: Terminal echo
-      env:
-        CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
       run: | 
-        echo "cmake preset $CMAKE_PRESET"
+        echo "cmake preset ${{env.CMAKE_PRESET}}"
         echo "${{matrix.platform.name}}"
         echo "${{matrix.platform.os}}"
         echo "${{matrix.compiler}}"
@@ -88,7 +86,7 @@ jobs:
 
     - name: CMake Configure
       run: |
-        cmake --preset $CMAKE_PRESET -DGIT_SHA:STRING=${{ github.sha }}
+        cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 
       #     # cmake -S . -B ./build -G "${{matrix.generator}}" -D${{ env.PROJECT_NAME }}_ENABLE_IPO=${{matrix.enable_ipo }} -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -D${{ env.PROJECT_NAME }}_PACKAGING_MAINTAINER_MODE:BOOL=${{matrix.packaging_maintainer_mode}} -D${{ env.PROJECT_NAME }}_ENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }}
 
