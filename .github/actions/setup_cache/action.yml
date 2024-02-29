@@ -24,6 +24,7 @@ runs:
         path: |
           ~/.cache/pip
           ~/.ccache
+          "~/.local/share/powershell/Modules"
           ./_Out/build/vcpkg_installed
           ${{ env.VCPKG_DOWNLOADS}}
           ${{ env.VCPKG_ROOT}}/archives
