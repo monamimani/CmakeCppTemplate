@@ -57,15 +57,10 @@ jobs:
           - platform:
             - name: Test
             - os: ubuntu-latest
-          # - platform:
-          #   - name: Linux
-            # generator: Ninja Multi-Config
-          # - platform:
-          #   - name: Windows
-          #   generator: Vs2022
+            generator: Ninja Multi-Config
         
     
-    name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
+    # name: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
     - name: Build
