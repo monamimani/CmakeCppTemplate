@@ -330,7 +330,8 @@
   "buildPresets": [
     {
       "name": "Linux-Clang-NinjaMultiConfig-Debug-Dev",
-      "configurePreset": "Linux-Clang-NinjaMultiConfig-Debug-Dev"
+      "configurePreset": "Linux-Clang-NinjaMultiConfig-Debug-Dev",
+      "configuration": "Debug"
     },
     {
       "name": "Linux-Clang-Ninja-Debug-Dev",
@@ -350,7 +351,8 @@
     },
     {
       "name": "Windows-Msvc-Vs2022-Debug-Dev",
-      "configurePreset": "Windows-Msvc-Vs2022-Debug-Dev"
+      "configurePreset": "Windows-Msvc-Vs2022-Debug-Dev",
+      "configuration": "Debug"
     },
     {
       "name": "Windows-Msvc-Ninja-Debug-Dev",
