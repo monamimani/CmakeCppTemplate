@@ -19,7 +19,7 @@ if(NOT BUILDING_MULTI_CONFIG)
     set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
 
     # Set the possible values of build type for cmake-gui, ccmake
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS $(BUILD_TYPES))
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${BUILD_TYPES})
   endif()
 
   if(NOT CMAKE_BUILD_TYPE IN_LIST BUILD_TYPES)
@@ -27,7 +27,7 @@ if(NOT BUILDING_MULTI_CONFIG)
   endif()
 
 else()
-  set(CMAKE_CONFIGURATION_TYPES $(BUILD_TYPES))
+  set(CMAKE_CONFIGURATION_TYPES ${BUILD_TYPES})
   set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
     "Reset the configurations to what we need"
     FORCE)
