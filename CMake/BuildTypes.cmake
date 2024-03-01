@@ -32,7 +32,8 @@ else()
     "Reset the configurations to what we need"
     FORCE)
 
-  if(NOT $<CONFIG:cfgs> IN_LIST BUILD_TYPES)
-    message(FATAL_ERROR "CMAKE_CONFIGURATION_TYPES is $<CONFIG:cfgs> and it must be one of ${BUILD_TYPES}")
-  endif()
+  # Can't validate Multi Config because it should be done at generator time.
+  # if(NOT $<CONFIG:cfgs> IN_LIST BUILD_TYPES)
+  # message(FATAL_ERROR "CMAKE_CONFIGURATION_TYPES is $<CONFIG:cfgs> and it must be one of ${BUILD_TYPES}")
+  # endif()
 endif()
