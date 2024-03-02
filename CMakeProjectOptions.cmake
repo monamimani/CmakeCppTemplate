@@ -13,6 +13,8 @@ macro(TEMPLATE_PROJECT_declare_options)
   # Cmake options that are likely to be different for each projects.
   # Common options that are unlikely to be changed are defined in CMake/StandardProjectSettings.cmake.
   if(PROJECT_IS_TOP_LEVEL)
+    option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
     cmake_dependent_option(TEMPLATE_PROJECT_ENABLE_CLANG_TIDY "Enable clang-tidy" ON "NOT TEMPLATE_PROJECT_BASIC_BUILD_MODE" OFF)
     cmake_dependent_option(TEMPLATE_PROJECT_ENABLE_CPPCHECK "Enable cpp-check analysis" ON "NOT TEMPLATE_PROJECT_BASIC_BUILD_MODE" OFF)
 
