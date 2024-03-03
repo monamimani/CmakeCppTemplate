@@ -73,8 +73,8 @@ function(
   if(LIST_OF_SANITIZERS)
     # if(NOT "${LIST_OF_SANITIZERS}" STREQUAL "")
     if(NOT MSVC)
-      target_compile_options(${TARGET_NAME} INTERFACE -fsanitize=${LIST_OF_SANITIZERS})
-      target_link_options(${TARGET_NAME} INTERFACE -fsanitize=${LIST_OF_SANITIZERS})
+      target_compile_options(${TARGET_NAME} INTERFACE "-fsanitize=${LIST_OF_SANITIZERS}")
+      target_link_options(${TARGET_NAME} INTERFACE "-fsanitize=${LIST_OF_SANITIZERS}")
     else()
       string(FIND "$ENV{PATH}" "$ENV{VSINSTALLDIR}" index_of_vs_install_dir)
 
@@ -85,9 +85,9 @@ function(
         )
       endif()
 
-      target_compile_options(${TARGET_NAME} INTERFACE /fsanitize=${LIST_OF_SANITIZERS} /Zi /INCREMENTAL:NO)
-      target_compile_definitions(${TARGET_NAME} INTERFACE _DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
-      target_link_options(${TARGET_NAME} INTERFACE /INCREMENTAL:NO)
+      target_compile_options(${TARGET_NAME} INTERFACE "/fsanitize=${LIST_OF_SANITIZERS} /Zi /INCREMENTAL:NO")
+      target_compile_definitions(${TARGET_NAME} INTERFACE "_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION")
+      target_link_options(${TARGET_NAME} INTERFACE "/INCREMENTAL:NO")
     endif()
 
     # endif()

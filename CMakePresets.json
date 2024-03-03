@@ -202,11 +202,11 @@
         "Common",
         "Linux",
         "Clang",
-        "NinjaMultiConfig"
+        "NinjaMultiConfig",
+        "Dev"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_KIND": "Dev"
+        // "CMAKE_BUILD_TYPE": "Debug" Commented because multiconfig generator don't use that CMake variable
       }
     },
     {
@@ -215,11 +215,11 @@
         "Common",
         "Linux",
         "Clang",
-        "Ninja"
+        "Ninja",
+        "Dev"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_KIND": "Dev"
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
@@ -228,11 +228,11 @@
         "Common",
         "Linux",
         "Clang",
-        "Ninja"
+        "Ninja",
+        "Dev"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "BUILD_KIND": "Dev"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     },
     {
@@ -241,11 +241,11 @@
         "Common",
         "Linux",
         "Clang",
-        "Ninja"
+        "Ninja",
+        "QA"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "BUILD_KIND": "QA"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     },
     {
@@ -254,11 +254,11 @@
         "Common",
         "Linux",
         "Clang",
-        "Ninja"
+        "Ninja",
+        "Shipping"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "BUILD_KIND": "Shipping"
+        "CMAKE_BUILD_TYPE": "Release"
       }
     },
     {
@@ -267,12 +267,10 @@
         "Common",
         "Windows",
         "Msvc",
-        "Vs2022"
+        "Vs2022",
+        "Dev"
       ],
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_KIND": "Dev"
-      }
+      "cacheVariables": {}
     },
     {
       "name": "Windows-Msvc-Ninja-Debug-Dev",
@@ -280,11 +278,11 @@
         "Common",
         "Windows",
         "Msvc",
-        "Ninja"
+        "Ninja",
+        "Dev"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_KIND": "Dev"
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
@@ -293,11 +291,11 @@
         "Common",
         "Windows",
         "Msvc",
-        "Ninja"
+        "Ninja",
+        "Dev"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "BUILD_KIND": "Dev"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     },
     {
@@ -306,11 +304,11 @@
         "Common",
         "Windows",
         "Msvc",
-        "Ninja"
+        "Ninja",
+        "QA"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "BUILD_KIND": "QA"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     },
     {
@@ -319,11 +317,11 @@
         "Common",
         "Windows",
         "Msvc",
-        "Ninja"
+        "Ninja",
+        "Shipping"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "BUILD_KIND": "Shipping"
+        "CMAKE_BUILD_TYPE": "Release"
       }
     }
   ],
