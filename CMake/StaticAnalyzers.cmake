@@ -61,8 +61,7 @@ macro(
 endmacro()
 
 macro(
-  add_target_interface_clang_tidy
-  TARGET_NAME
+  TEMPLATE_PROJECT_enable_clang_tidy
   WARNINGS_AS_ERRORS
 )
   if(NOT CLANGTIDY)
@@ -70,18 +69,7 @@ macro(
     return()
   endif()
 
-  if(NOT CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    get_target_property(TARGET_PCH ${TARGET_NAME} INTERFACE_PRECOMPILE_HEADERS)
-
-    if("${TARGET_PCH}" STREQUAL "TARGET_PCH-NOTFOUND")
-      get_target_property(TARGET_PCH ${TARGET_NAME} PRECOMPILE_HEADERS)
-    endif()
-
-    if(NOT("${TARGET_PCH}" STREQUAL "TARGET_PCH-NOTFOUND"))
-      message(SEND_ERROR "clang-tidy cannot be enabled with non-clang compiler and PCH, clang-tidy fails to handle gcc's PCH file")
-    endif()
-  endif()
-
+  # Clang Tidy can't handle GCC PCH file.
   set(CLANG_TIDY_OPTIONS
     ${CLANGTIDY}
     -extra-arg=-Wno-unknown-warning-option
