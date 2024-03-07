@@ -95,11 +95,15 @@ function(add_global_code_hardening)
   message(STATUS "Hardening Linker Flags: ${CODE_HARDENING_LINK_OPTIONS}")
   message(STATUS "Hardening Compiler Defines: ${CODE_HARDENING_CXX_DEFINITIONS}")
 
-  list(JOIN CODE_HARDENING_COMPILE_OPTIONS " " CMAKE_CXX_FLAGS)
-  list(JOIN CODE_HARDENING_LINK_OPTIONS " " CMAKE_EXE_LINKER_FLAGS)
-  list(JOIN CODE_HARDENING_COMPILE_OPTIONS " " CMAKE_CXX_FLAGS)
+  add_compile_options(${CODE_HARDENING_COMPILE_OPTIONS})
+  add_compile_definitions(${CODE_HARDENING_CXX_DEFINITIONS})
+  add_link_options(${CODE_HARDENING_LINK_OPTIONS})
 
-  return(PROPAGATE CMAKE_CXX_FLAGS CMAKE_EXE_LINKER_FLAGS)
+  # Join list doesn't work it overwrite what was already in CMAKE_CXX_FLAGS
+  # list(JOIN CODE_HARDENING_COMPILE_OPTIONS " " CMAKE_CXX_FLAGS)
+  # list(JOIN CODE_HARDENING_LINK_OPTIONS " " CMAKE_EXE_LINKER_FLAGS)
+  # list(JOIN CODE_HARDENING_CXX_DEFINITIONS " " CMAKE_CXX_FLAGS)
+  # return(PROPAGATE CMAKE_CXX_FLAGS CMAKE_EXE_LINKER_FLAGS)
 endfunction()
 
 function(add_target_interface_code_hardening TARGET_NAME)

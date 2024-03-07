@@ -56,7 +56,7 @@ macro(
   endif()
 
   if(${WARNINGS_AS_ERRORS})
-    list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
+    set(CMAKE_CXX_CPPCHECK ${CMAKE_CXX_CPPCHECK} --error-exitcode=2)
   endif()
 endmacro()
 
