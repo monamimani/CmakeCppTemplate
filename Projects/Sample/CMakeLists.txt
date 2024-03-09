@@ -35,6 +35,8 @@ set(privateFiles
 )
 
 set(testFiles
+  ${targetName}/Sample.gtest.cpp
+  ${targetName}/Sample.catch2.cpp
 )
 
 set(benchmarkFiles
@@ -74,3 +76,52 @@ target_link_libraries(${targetName}
   TEMPLATE_PROJECT::TEMPLATE_PROJECT_warnings
   TEMPLATE_PROJECT::TEMPLATE_PROJECT_sanitizers
 )
+
+# Add test targets if BUILD_TESTING
+if(NOT BUILD_TESTING)
+  return()
+endif()
+
+set(targetNameTests ${targetName}Tests)
+
+# Provide a simple smoke test to make sure that the CLI works and can display a --help message
+add_test(NAME cli.has_help COMMAND intro --help)
+
+# Provide a test to verify that the version being reported from the application
+# matches the version given to CMake. This will be important once you package
+# your program. Real world shows that this is the kind of simple mistake that is easy
+# to make, but also easy to test for.
+add_test(NAME cli.version_matches COMMAND intro --version)
+set_tests_properties(cli.version_matches PROPERTIES PASS_REGULAR_EXPRESSION "${PROJECT_VERSION}")
+
+get_target_property("${targetNameTests}Include" ${targetName} INCLUDE_DIRECTORIES)
+get_target_property("${targetNameTests}Sources" ${targetName} SOURCES)
+get_target_property("${targetNameTests}Libraires" ${targetName} LINK_LIBRARIES)
+
+cmake_print_variables(${targetNameTests}Include)
+cmake_print_variables(${targetNameTests}Sources)
+cmake_print_variables(${targetNameTests}Libraires)
+
+add_executable(${targetNameTests})
+set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
+catch_discover_tests(${targetNameTests})
+
+target_include_directories(${targetNameTests}
+  PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  ${${targetNameTests}Include}
+)
+
+target_sources(${targetNameTests}
+  PRIVATE
+  ${${targetNameTests}Sources}
+  ${testFiles}
+)
+
+target_link_libraries(${targetNameTests}
+  PRIVATE
+  ${${targetNameTests}Libraires}
+  Catch2::Catch2WithMain
+)
+
+target_compile_definitions(${targetNameTests} PUBLIC TEST_CATCH2)

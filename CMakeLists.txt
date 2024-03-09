@@ -33,7 +33,7 @@ TEMPLATE_PROJECT_target_options()
 
 # If this project is consumed by another, don't setup tests.
 if(PROJECT_IS_TOP_LEVEL)
-  enable_testing()
+  include(CMake/Tests.cmake)
 endif()
 
 # add_subdirectory(Projects)
@@ -46,6 +46,15 @@ foreach(ITEM ${PROJECT_CONTENTS})
   endif()
 endforeach()
 
+# If MSVC is being used, and ASAN is enabled, we need to set the debugger environment
+# so that it behaves well with MSVC's debugger, and we can run the target from visual studio
+# if(MSVC)
+# get_all_installable_targets(all_targets)
+# message("all_targets=${all_targets}")
+# set_target_properties(${all_targets} PROPERTIES VS_DEBUGGER_ENVIRONMENT "PATH=$(VC_ExecutablePath_x64);%PATH%")
+# endif()
+
+# set the startup project for the "play" button in MSVC
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT Sample)
 
 if(CMAKE_SKIP_INSTALL_RULES)

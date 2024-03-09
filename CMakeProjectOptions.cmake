@@ -9,6 +9,8 @@ include(CMake/StandardProjectSettings.cmake)
 include(CMake/Sanitizers.cmake)
 include(CMake/Fuzzer.cmake)
 
+include(CTest)
+
 macro(TEMPLATE_PROJECT_declare_options)
   # Cmake options that are likely to be different for each projects.
   # Common options that are unlikely to be changed are defined in CMake/StandardProjectSettings.cmake.
@@ -60,6 +62,11 @@ macro(TEMPLATE_PROJECT_declare_options)
     set(DEFAULT_FUZZER OFF)
   endif()
 
+  # Using include(CTest)
+  # or
+  # enable_testing()
+  # option(TEMPLATE_PROJECT_BUILD_TESTS "Builds the tests" ON)
+  option(TEMPLATE_PROJECT_BUILD_BENCHMARKS "Builds the benchmarks" ON)
   option(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS "Enable fuzz testing executable" ${DEFAULT_FUZZER})
 endmacro()
 

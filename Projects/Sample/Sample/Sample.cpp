@@ -2,9 +2,17 @@
 
 namespace Smpl
 {
-int getAnswer()
+int factorial(int input) noexcept
 {
-  constexpr auto theAnswer = 42;
-  return theAnswer;
+  int result = 1;
+
+  while (input > 0)
+  {
+    result *= input;
+    --input;
+  }
+
+  return result;
 }
+
 } // namespace Smpl
