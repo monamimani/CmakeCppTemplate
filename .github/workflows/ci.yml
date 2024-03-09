@@ -91,7 +91,7 @@ jobs:
     - name: CMake Configure
       shell: pwsh
       run: |
-
+        Get-ChildItem env:
         if(${{runner.os == 'Windows' && '$true' || '$false'}})
         {
           & { . Scripts\Build\VsEnvironment.ps1; LaunchVsDevShell }
