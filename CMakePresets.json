@@ -45,7 +45,6 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/_Out/build/${presetName}",
       "installDir": "${sourceDir}/_Out/install/${presetName}",
-      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "warnings": {
         "uninitialized": true,
         "dev": true,
@@ -74,9 +73,7 @@
     {
       "name": "Linux",
       "hidden": true,
-      "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-linux"
-      },
+      "cacheVariables": {},
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
@@ -127,6 +124,7 @@
     {
       "name": "Msvc",
       "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "cl",
         "CMAKE_CXX_COMPILER": "cl",
@@ -142,6 +140,7 @@
     {
       "name": "Clang-cl",
       "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang-cl",
         "CMAKE_CXX_COMPILER": "clang-cl"
@@ -160,10 +159,9 @@
     {
       "name": "Clang",
       "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_C_COMPILER": "clang",
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_CXX_FLAGS": "-stdlib=libc++"
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-libcxx"
       },
       "condition": {
         "type": "equals",
@@ -179,11 +177,13 @@
     {
       "name": "Gcc",
       "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++",
         "CMAKE_CXX_FLAGS": "",
-        "CMAKE_C_FLAGS": ""
+        "CMAKE_C_FLAGS": "",
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
       },
       "condition": {
         "type": "equals",
