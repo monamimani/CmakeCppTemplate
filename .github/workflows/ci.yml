@@ -63,6 +63,7 @@ jobs:
 
     steps:
     - name: Terminal echo
+      shell: bash
       run: | 
         echo "cmake preset ${{env.CMAKE_PRESET}}"
         echo "${{matrix.platform.name}}"

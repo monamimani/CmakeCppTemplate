@@ -50,6 +50,7 @@ jobs:
           git config --list
           git pull --ff-only
           git rev-parse HEAD
+          vcpkg --version
           popd
 
       - name: Setup Cache
