@@ -38,11 +38,11 @@ jobs:
           - Debug
         basic_build_mode:
           - ON
-    
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Get organization and project name 
+      - name: Get organization and project name
         run: |
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
@@ -59,6 +59,7 @@ jobs:
         run: |
           pushd "${{env.VCPKG_ROOT}}"
           #git pull --ff-only
+          chown -R $(id -u):$(id -g) $PWD
           git config --global --add safe.directory "${{env.VCPKG_ROOT}}"
           git rev-parse HEAD
           popd
@@ -88,7 +89,7 @@ jobs:
         run: |
           # hyphens and dots in c++ identifiers are forbidden. Use underscores instead.
           NEW_SAFE_PROJECT=$(echo ${{ env.NEW_PROJECT }} | sed "s/-/_/g" | sed "s/\./_/g" )
-          echo "NEW_SAFE_PROJECT=$NEW_SAFE_PROJECT" >> $GITHUB_ENV 
+          echo "NEW_SAFE_PROJECT=$NEW_SAFE_PROJECT" >> $GITHUB_ENV
 
       - name: Insert new org and project
         run: |
@@ -184,7 +185,7 @@ jobs:
           generator: ${{ matrix.generator }}
           packaging_maintainer_mode: ${{ matrix.basic_build_mode }}
 
-      - name: Get organization and project name 
+      - name: Get organization and project name
         run: |
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
@@ -213,7 +214,7 @@ jobs:
 
       - name: Update repository to match new template information
         run: |
-          # Update the README and template files to match the new org / repository names 
+          # Update the README and template files to match the new org / repository names
           sed -i "s|${{ env.TEMPLATE_REPOSITORY }}|${{ env.NEW_REPOSITORY }}|g" README.md ${{ env.TEMPLATES_PATH }}/template_repository
           sed -i "s|${{ env.TEMPLATE_NAME }}|${{ env.NEW_PROJECT }}|g" README.md ${{ env.TEMPLATES_PATH }}/template_name
 
@@ -224,7 +225,7 @@ jobs:
       - name: Test simple configuration to make sure nothing broke (default compiler,cmake,developer_mode OFF)
         run: |
             cmake --preset Linux-Clang-Ninja-Debug-Dev -D${{ env.NEW_PROJECT }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
-            cmake --build --preset Linux-Clang-Ninja-Debug-Dev 
+            cmake --build --preset Linux-Clang-Ninja-Debug-Dev
 
       - uses: EndBug/add-and-commit@v9
         # only commit and push if we are a template and project name has changed
