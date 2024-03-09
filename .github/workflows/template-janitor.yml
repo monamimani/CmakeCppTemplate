@@ -59,6 +59,7 @@ jobs:
         run: |
           pushd "${{env.VCPKG_ROOT}}"
           #git pull --ff-only
+          git config --global --add safe.directory "${{env.VCPKG_ROOT}}"
           git rev-parse HEAD
           popd
 
