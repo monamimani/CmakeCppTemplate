@@ -79,6 +79,7 @@ jobs:
         echo "${{matrix.build_kind}}"
 
     - name: Update vcpkg
+      shell: bash
       run: |
         pushd "${{env.VCPKG_ROOT}}"
         git config --list

@@ -53,7 +53,7 @@ jobs:
       - name: Set Ownership
         run: |
           chown -R $(id -u):$(id -g) $PWD
-          #git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Update vcpkg
         run: |
