@@ -62,9 +62,14 @@ jobs:
       CMAKE_PRESET: ${{matrix.platform.name}}-${{matrix.compiler}}-${{matrix.generator}}-${{matrix.build_type}}-${{matrix.build_kind}}
 
     steps:
+    - uses: actions/checkout@v4
+
     - name: Terminal echo
       shell: bash
       run: | 
+
+        echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+
         echo "cmake preset ${{env.CMAKE_PRESET}}"
         echo "${{matrix.platform.name}}"
         echo "${{matrix.platform.os}}"
@@ -79,8 +84,6 @@ jobs:
         git rev-parse HEAD
         popd
 
-    - uses: actions/checkout@v4
-
     # - name: Set ownership
     #   shell: bash
     #   run: |
@@ -92,7 +95,7 @@ jobs:
     #   if: runner.os == 'Linux'
     #   shell: bash
     #   run: |
-    #     pushd "${{env.VCPKG_ROOT}}"
+    #     pushd "${{env.VCPKG_INSTALLATION_ROOT}}"
     #     chown -R $(id -u):$(id -g) $PWD
     #     # git config --global --add safe.directory "$GITHUB_WORKSPACE"
     #     git pull --ff-only
