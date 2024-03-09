@@ -55,6 +55,9 @@ jobs:
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
+      - name: Vcpkg Cache
+        uses: ./.github/actions/vcpkg_cache
+
       - name: Setup Cache
         uses: ./.github/actions/setup_cache
         with:
