@@ -72,6 +72,12 @@ jobs:
         echo "${{matrix.build_type}}"
         echo "${{matrix.build_kind}}"
 
+        pushd "${{env.VCPKG_ROOT}}"
+        git config --list
+        git pull --ff-only
+        git rev-parse HEAD
+        popd
+
     - uses: actions/checkout@v4
 
     # - name: Set ownership
