@@ -22,9 +22,9 @@ FormatStyle:     none
 
 CheckOptions:
   - key: readability-identifier-length.IgnoredVariableNames
-    value: 'x|y|z'
+    value: 'x|y|z|_'
   - key: readability-identifier-length.IgnoredParameterNames
-    value: 'x|y|z'
+    value: 'x|y|z|_'
   - key: readability-identifier-naming.NamespaceCase
     value: CamelCase
   - key: readability-identifier-naming.EnumCase

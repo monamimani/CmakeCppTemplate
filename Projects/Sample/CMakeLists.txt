@@ -40,6 +40,7 @@ set(testFiles
 )
 
 set(benchmarkFiles
+  ${targetName}/Sample.benchmark.cpp
 )
 
 add_library(${targetName})
@@ -150,3 +151,30 @@ target_link_libraries(${targetNameTests}
 )
 
 target_compile_definitions(${targetNameTests} PUBLIC TEST_GTEST)
+
+# I am evaluating if I use Catch2, and Catch2 also have a benchmark facility.
+# Google Benchmark
+set(targetNameBenchmark ${targetName}GBenchmark)
+
+add_executable(${targetNameBenchmark})
+set_target_properties(${targetNameBenchmark} PROPERTIES FOLDER Benchmark)
+
+target_include_directories(${targetNameBenchmark}
+  PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  ${${targetName}Include}
+)
+
+target_sources(${targetNameBenchmark}
+  PRIVATE
+  ${${targetName}Sources}
+  ${benchmarkFiles}
+)
+
+target_link_libraries(${targetNameBenchmark}
+  PRIVATE
+  ${${targetName}Libraires}
+  benchmark::benchmark_main
+)
+
+target_compile_definitions(${targetNameBenchmark} PUBLIC BENCHMARK_GBENCHAMRK)
