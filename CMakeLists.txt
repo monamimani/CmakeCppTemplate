@@ -27,6 +27,8 @@ project(TEMPLATE_PROJECT
 
 include(CMakeProjectOptions.cmake)
 
+find_package(fmt CONFIG REQUIRED)
+
 TEMPLATE_PROJECT_declare_options()
 TEMPLATE_PROJECT_global_options()
 TEMPLATE_PROJECT_target_options()

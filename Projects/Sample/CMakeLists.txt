@@ -67,6 +67,7 @@ target_sources(${targetName}
 
 set(privateLibs
   TEMPLATE_PROJECT::Config
+  fmt::fmt
 )
 
 target_link_libraries(${targetName}
@@ -120,6 +121,7 @@ target_sources(${targetNameTests}
 target_link_libraries(${targetNameTests}
   PRIVATE
   ${${targetName}Libraires}
+  fmt::fmt
   Catch2::Catch2WithMain
 )
 
@@ -130,7 +132,7 @@ set(targetNameTests ${targetName}TestsGTest)
 
 add_executable(${targetNameTests})
 set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
-catch_discover_tests(${targetNameTests})
+gtest_discover_tests(${targetNameTests})
 
 target_include_directories(${targetNameTests}
   PUBLIC
@@ -147,6 +149,7 @@ target_sources(${targetNameTests}
 target_link_libraries(${targetNameTests}
   PRIVATE
   ${${targetName}Libraires}
+  fmt::fmt
   GTest::gtest_main
 )
 
@@ -174,6 +177,7 @@ target_sources(${targetNameBenchmark}
 target_link_libraries(${targetNameBenchmark}
   PRIVATE
   ${${targetName}Libraires}
+  fmt::fmt
   benchmark::benchmark_main
 )
 
