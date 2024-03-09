@@ -87,12 +87,12 @@ jobs:
         git rev-parse HEAD
         popd
 
-    # - name: Set ownership
-    #   shell: bash
-    #   run: |
-    #     # this is to fix GIT not liking owner of the checkout dir
-    #     chown -R $(id -u):$(id -g) $PWD
-    #     #git config --global --add safe.directory "$GITHUB_WORKSPACE"
+    - name: Set ownership
+      shell: bash
+      run: |
+        # this is to fix GIT not liking owner of the checkout dir
+        #chown -R $(id -u):$(id -g) $PWD
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
     
     # - name: Update VCPKG
     #   if: runner.os == 'Linux'

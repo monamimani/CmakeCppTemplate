@@ -59,6 +59,7 @@ jobs:
         run: |
           pushd "${{env.VCPKG_ROOT}}"
           #git pull --ff-only
+          git rev-parse HEAD
           popd
 
       - name: Setup Cache
