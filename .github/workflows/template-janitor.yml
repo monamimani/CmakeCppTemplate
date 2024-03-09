@@ -45,6 +45,7 @@ jobs:
       - name: Get organization and project name
         run: |
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
           echo "NEW_ORG=${{ github.repository_owner }}" >> $GITHUB_ENV
           echo "NEW_PROJECT=${{ github.event.repository.name }}" >> $GITHUB_ENV
@@ -52,17 +53,7 @@ jobs:
 
       - name: Set Ownership
         run: |
-          # chown -R $(id -u):$(id -g) $PWD
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      - name: Update vcpkg
-        run: |
-          pushd "${{env.VCPKG_ROOT}}"
-          #git pull --ff-only
-          # chown -R $(id -u):$(id -g) $PWD
-          # git config --global --add safe.directory "${{env.VCPKG_ROOT}}"
-          # git rev-parse HEAD
-          popd
 
       - name: Setup Cache
         uses: ./.github/actions/setup_cache

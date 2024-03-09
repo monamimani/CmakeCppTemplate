@@ -64,28 +64,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Terminal echo
+    - name: Env variable
       shell: bash
       run: | 
-
         echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
-
-        echo "cmake preset ${{env.CMAKE_PRESET}}"
-        echo "${{matrix.platform.name}}"
-        echo "${{matrix.platform.os}}"
-        echo "${{matrix.compiler}}"
-        echo "${{matrix.generator}}"
-        echo "${{matrix.build_type}}"
-        echo "${{matrix.build_kind}}"
-
-    - name: Update vcpkg
-      shell: bash
-      run: |
-        pushd "${{env.VCPKG_ROOT}}"
-        git config --list
-        #git pull --ff-only
-        #git rev-parse HEAD
-        popd
 
     - name: Set ownership
       shell: bash
@@ -93,16 +75,6 @@ jobs:
         # this is to fix GIT not liking owner of the checkout dir
         #chown -R $(id -u):$(id -g) $PWD
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
-    
-    # - name: Update VCPKG
-    #   if: runner.os == 'Linux'
-    #   shell: bash
-    #   run: |
-    #     pushd "${{env.VCPKG_INSTALLATION_ROOT}}"
-    #     chown -R $(id -u):$(id -g) $PWD
-    #     # git config --global --add safe.directory "$GITHUB_WORKSPACE"
-    #     git pull --ff-only
-    #     popd
 
     - name: Vcpkg Cache
       uses: ./.github/actions/vcpkg_cache
