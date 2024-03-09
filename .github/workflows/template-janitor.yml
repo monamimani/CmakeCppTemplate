@@ -52,16 +52,16 @@ jobs:
 
       - name: Set Ownership
         run: |
-          chown -R $(id -u):$(id -g) $PWD
+          # chown -R $(id -u):$(id -g) $PWD
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Update vcpkg
         run: |
           pushd "${{env.VCPKG_ROOT}}"
           #git pull --ff-only
-          chown -R $(id -u):$(id -g) $PWD
-          git config --global --add safe.directory "${{env.VCPKG_ROOT}}"
-          git rev-parse HEAD
+          # chown -R $(id -u):$(id -g) $PWD
+          # git config --global --add safe.directory "${{env.VCPKG_ROOT}}"
+          # git rev-parse HEAD
           popd
 
       - name: Setup Cache

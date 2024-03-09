@@ -84,7 +84,7 @@ jobs:
         pushd "${{env.VCPKG_ROOT}}"
         git config --list
         #git pull --ff-only
-        git rev-parse HEAD
+        #git rev-parse HEAD
         popd
 
     - name: Set ownership
