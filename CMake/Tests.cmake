@@ -5,12 +5,15 @@ if(TEMPLATE_PROJECT_BUILD_BENCHMARKS)
 endif()
 
 if(BUILD_TESTING) # or if(TEMPLATE_PROJECT_BUILD_TESTS)
-  # find_package(GTest CONFIG REQUIRED)
-  # include(GoogleTest)
+  set(_FIND_COMPONENTS "") # To Silence Gtest dev warning
+  find_package(GTest CONFIG REQUIRED)
+  include(GoogleTest)
+  unset(_FIND_COMPONENTS)
 
-  # if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  # set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  # endif()
+  if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  endif()
+
   find_package(Catch2 3 CONFIG REQUIRED)
   include(Catch)
 endif()
