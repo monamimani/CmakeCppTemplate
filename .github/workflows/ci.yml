@@ -78,9 +78,11 @@ jobs:
         echo "${{matrix.build_type}}"
         echo "${{matrix.build_kind}}"
 
+    - name: Update vcpkg
+      run: |
         pushd "${{env.VCPKG_ROOT}}"
         git config --list
-        git pull --ff-only
+        #git pull --ff-only
         git rev-parse HEAD
         popd
 

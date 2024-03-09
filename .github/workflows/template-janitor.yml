@@ -50,15 +50,15 @@ jobs:
           echo "NEW_PROJECT=${{ github.event.repository.name }}" >> $GITHUB_ENV
           echo "NEW_URL=${{ github.repositoryUrl }}" >> $GITHUB_ENV
 
-      - name: Update vcpkg and set ownership
+      - name: Set Ownership
         run: |
-          pushd "${{env.VCPKG_ROOT}}"
           chown -R $(id -u):$(id -g) $PWD
           #git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --list
-          git pull --ff-only
-          git rev-parse HEAD
-          vcpkg --version
+
+      - name: Update vcpkg
+        run: |
+          pushd "${{env.VCPKG_ROOT}}"
+          #git pull --ff-only
           popd
 
       - name: Setup Cache
