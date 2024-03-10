@@ -43,6 +43,10 @@ set(benchmarkFiles
   ${targetName}/Sample.benchmark.cpp
 )
 
+set(fuzzerFiles
+  ${targetName}/Sample.fuzzer.cpp
+)
+
 add_library(${targetName})
 add_library(TEMPLATE_PROJECT::${targetName} ALIAS ${targetName})
 
@@ -181,4 +185,39 @@ target_link_libraries(${targetNameBenchmark}
   benchmark::benchmark_main
 )
 
-target_compile_definitions(${targetNameBenchmark} PUBLIC BENCHMARK_GBENCHAMRK)
+# Fuzzer
+# https://llvm.org/docs/LibFuzzer.html
+set(targetNameFuzzer ${targetName}Fuzzer)
+
+add_executable(${targetNameFuzzer})
+set_target_properties(${targetNameFuzzer} PROPERTIES FOLDER Fuzzer)
+
+target_include_directories(${targetNameFuzzer}
+  PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  ${${targetName}Include}
+)
+
+target_sources(${targetNameFuzzer}
+  PRIVATE
+  ${${targetName}Sources}
+  ${fuzzerFiles}
+)
+
+target_link_libraries(${targetNameFuzzer}
+  PRIVATE
+  ${${targetName}Libraires}
+  fmt::fmt
+  -coverage
+  -fsanitize=fuzzer
+  -stdlib=libstdc++
+)
+
+target_compile_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer -stdlib=libstdc++)
+
+# Allow short runs during automated testing to see if something new breaks
+set(FUZZ_RUNTIME
+  10
+  CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
+
+add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
