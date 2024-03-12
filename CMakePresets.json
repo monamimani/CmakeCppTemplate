@@ -46,9 +46,9 @@
       "binaryDir": "${sourceDir}/_Out/build/${presetName}",
       "installDir": "${sourceDir}/_Out/install/${presetName}",
       "warnings": {
-        "uninitialized": true,
-        "dev": true,
-        "deprecated": true
+        "uninitialized": false,
+        "dev": false,
+        "deprecated": false
       },
       "trace": {
         "mode": "on",

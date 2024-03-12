@@ -10,6 +10,7 @@ option(TEMPLATE_PROJECT_BASIC_BUILD_MODE "Disable most of the nice to have build
 # used for the function generate_export_header( someLib) that will generate a header file somelib_export.h for exporting symbol from a dynamic library.
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
+include(FetchContent)
 include(ProcessorCount)
 ProcessorCount(PROCESSOR_COUNT)
 include(CMake/BuildTypes.cmake)

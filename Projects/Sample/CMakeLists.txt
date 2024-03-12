@@ -47,6 +47,10 @@ set(fuzzerFiles
   ${targetName}/Sample.fuzzer.cpp
 )
 
+set(fuzztestFiles
+  ${targetName}/Sample.fuzztest.cpp
+)
+
 add_library(${targetName})
 add_library(TEMPLATE_PROJECT::${targetName} ALIAS ${targetName})
 
@@ -221,3 +225,31 @@ set(FUZZ_RUNTIME
   CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
 
 add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
+
+# Google/FuzzTest
+set(targetNameFuzzTest ${targetName}FuzzTest)
+
+add_executable(${targetNameFuzzTest})
+set_target_properties(${targetNameFuzzTest} PROPERTIES FOLDER Fuzzer)
+
+target_include_directories(${targetNameFuzzTest}
+  PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  ${${targetName}Include}
+)
+
+target_sources(${targetNameFuzzTest}
+  PRIVATE
+  ${${targetName}Sources}
+  ${fuzztestFiles}
+)
+
+target_link_libraries(${targetNameFuzzTest}
+  PRIVATE
+  ${${targetName}Libraires}
+  fmt::fmt
+)
+
+# fuzztest_setup_fuzzing_flags(${targetNameFuzzTest})
+link_fuzztest(${targetNameFuzzTest})
+gtest_discover_tests(${targetNameFuzzTest})

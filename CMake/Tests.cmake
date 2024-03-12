@@ -5,6 +5,17 @@ if(TEMPLATE_PROJECT_BUILD_BENCHMARKS)
 endif()
 
 if(BUILD_TESTING) # or if(TEMPLATE_PROJECT_BUILD_TESTS)
+  block(SCOPE_FOR VARIABLES)
+  unset(CMAKE_CXX_CPPCHECK)
+  unset(CMAKE_CXX_CLANG_TIDY)
+  FetchContent_Declare(
+    fuzztest
+    GIT_REPOSITORY https://github.com/google/fuzztest.git
+    GIT_TAG main
+  )
+  FetchContent_MakeAvailable(fuzztest)
+  endblock()
+
   set(_FIND_COMPONENTS "") # To Silence Gtest dev warning
   find_package(GTest CONFIG REQUIRED)
   include(GoogleTest)

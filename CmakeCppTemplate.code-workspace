@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../usr/local/vcpkg"
+    },
+    {
+      "path": "../../usr/local/vcpkg-downloads"
+    },
+    {
+      "path": "../../home/vscode/.cache/vcpkg"
+    }
+  ],
+  "settings": {}
+}
