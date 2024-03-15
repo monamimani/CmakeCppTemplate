@@ -1,6 +1,6 @@
 {
   "name": "CppDevContainer",
-  "image": "ghcr.io/monamimani-builds/cpp-devcontainer",
+  "image": "ghcr.io/monamimani-builds/cpp-devcontainer:v1.0.0",
   "customizations": {
     "vscode": {
       "settings": {
