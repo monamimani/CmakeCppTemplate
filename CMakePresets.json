@@ -161,7 +161,7 @@
       "hidden": true,
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/CMake/toolchains/linux_clang.chainload.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/Vcpkg/ChainloadToolchains/linux-clang.chainload.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-linux-clang-libcxx"
       },
       "condition": {
