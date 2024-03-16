@@ -1,6 +1,6 @@
 {
   "name": "CppDevContainer",
-  "image": "ghcr.io/monamimani-builds/cpp-devcontainer:5cc6073a86407c06d81eea4fe81cfec396dff421",
+  "image": "ghcr.io/monamimani-builds/cpp-devcontainer:2cadf5e7147ba128c3886ab47ab56d24700c39a5",
   "runArgs": [
     "--name",
     "cpp-devcontainer",
@@ -28,7 +28,7 @@
     //   "ghcr.io/devcontainers/features/git": {},
     //   "ghcr.io/devcontainers/features/git-lfs": {},
     //   "ghcr.io/devcontainers/features/powershell": {},
-    //   "ghcr.io/devcontainers-community/features/llvm": {}
+    //   "ghcr.io/devcontainers-community/features/llvm": {},
   },
   "postStartCommand": "chmod +x .devcontainer/gitconfig-identity.sh && .devcontainer/gitconfig-identity.sh"
 }
