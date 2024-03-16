@@ -16,6 +16,9 @@ _Bin
 _BinIntermediate
 _Tmp
 
+#Fuzztest output in the source folder ignoring it for now.
+/dist
+
 CPTCMakeBuild
 CompileCommands
 
