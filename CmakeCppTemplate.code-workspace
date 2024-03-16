@@ -11,6 +11,9 @@
     },
     {
       "path": "../../home/vscode/.cache/vcpkg"
+    },
+    {
+      "path": "/"
     }
   ],
   "settings": {}
