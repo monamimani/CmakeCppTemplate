@@ -4,9 +4,9 @@
     "baseline": "3f966cf6a8654a0bc067738bcb95d489e197ad68"
   },
   "overlay-triplets": [
-    "./CMake/vcpkg-triplets"
+    "./Vcpkg/OverlayTriplets"
   ],
   "overlay-ports": [
-    "./VcpkgPorts/"
+    "./Vcpkg/OverlayPorts"
   ]
 }

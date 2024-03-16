@@ -24,10 +24,11 @@
       ]
     }
   },
-  // "features": {
-  //   "ghcr.io/devcontainers/features/git": {},
-  //   "ghcr.io/devcontainers/features/git-lfs": {},
-  //   "ghcr.io/devcontainers/features/powershell": {},
-  //   "ghcr.io/devcontainers-community/features/llvm": {}
-  // }
+  "features": {
+    //   "ghcr.io/devcontainers/features/git": {},
+    //   "ghcr.io/devcontainers/features/git-lfs": {},
+    //   "ghcr.io/devcontainers/features/powershell": {},
+    //   "ghcr.io/devcontainers-community/features/llvm": {}
+  },
+  "postStartCommand": "chmod +x .devcontainer/gitconfig-identity.sh && .devcontainer/gitconfig-identity.sh"
 }
