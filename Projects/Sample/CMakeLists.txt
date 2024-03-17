@@ -108,123 +108,131 @@ get_target_property("${targetName}Libraires" ${targetName} LINK_LIBRARIES)
 # I am in the process of evaluating Catch2 vs Gtest so I will add them both here for the moment.
 # When I decide if I want to switch to Catch2 I'll modify this as appropriate.
 # Catch2 tests
-set(targetNameTests ${targetName}TestsCatch2)
+if(Catch2_FOUND)
+  set(targetNameTests ${targetName}TestsCatch2)
 
-add_executable(${targetNameTests})
-set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
-catch_discover_tests(${targetNameTests})
+  add_executable(${targetNameTests})
+  set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
+  catch_discover_tests(${targetNameTests})
 
-target_include_directories(${targetNameTests}
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  ${${targetName}Include}
-)
+  target_include_directories(${targetNameTests}
+    PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${${targetName}Include}
+  )
 
-target_sources(${targetNameTests}
-  PRIVATE
-  ${${targetName}Sources}
-  ${testFiles}
-)
+  target_sources(${targetNameTests}
+    PRIVATE
+    ${${targetName}Sources}
+    ${testFiles}
+  )
 
-target_link_libraries(${targetNameTests}
-  PRIVATE
-  ${${targetName}Libraires}
-  fmt::fmt
-  Catch2::Catch2WithMain
-)
+  target_link_libraries(${targetNameTests}
+    PRIVATE
+    ${${targetName}Libraires}
+    fmt::fmt
+    Catch2::Catch2WithMain
+  )
 
-target_compile_definitions(${targetNameTests} PUBLIC TEST_CATCH2)
+  target_compile_definitions(${targetNameTests} PUBLIC TEST_CATCH2)
+endif(Catch2_FOUND)
 
 # GTests tests
-set(targetNameTests ${targetName}TestsGTest)
+if(GTest_FOUND)
+  set(targetNameTests ${targetName}TestsGTest)
 
-add_executable(${targetNameTests})
-set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
-gtest_discover_tests(${targetNameTests})
+  add_executable(${targetNameTests})
+  set_target_properties(${targetNameTests} PROPERTIES FOLDER Tests)
+  gtest_discover_tests(${targetNameTests})
 
-target_include_directories(${targetNameTests}
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  ${${targetName}Include}
-)
+  target_include_directories(${targetNameTests}
+    PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${${targetName}Include}
+  )
 
-target_sources(${targetNameTests}
-  PRIVATE
-  ${${targetName}Sources}
-  ${testFiles}
-)
+  target_sources(${targetNameTests}
+    PRIVATE
+    ${${targetName}Sources}
+    ${testFiles}
+  )
 
-target_link_libraries(${targetNameTests}
-  PRIVATE
-  ${${targetName}Libraires}
-  fmt::fmt
-  GTest::gtest_main
-)
+  target_link_libraries(${targetNameTests}
+    PRIVATE
+    ${${targetName}Libraires}
+    fmt::fmt
+    GTest::gtest_main
+  )
 
-target_compile_definitions(${targetNameTests} PUBLIC TEST_GTEST)
+  target_compile_definitions(${targetNameTests} PUBLIC TEST_GTEST)
+endif(GTest_FOUND)
 
 # I am evaluating if I use Catch2, and Catch2 also have a benchmark facility.
 # Google Benchmark
-set(targetNameBenchmark ${targetName}GBenchmark)
+if(benchmark_FOUND)
+  set(targetNameBenchmark ${targetName}GBenchmark)
 
-add_executable(${targetNameBenchmark})
-set_target_properties(${targetNameBenchmark} PROPERTIES FOLDER Benchmark)
+  add_executable(${targetNameBenchmark})
+  set_target_properties(${targetNameBenchmark} PROPERTIES FOLDER Benchmark)
 
-target_include_directories(${targetNameBenchmark}
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  ${${targetName}Include}
-)
+  target_include_directories(${targetNameBenchmark}
+    PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${${targetName}Include}
+  )
 
-target_sources(${targetNameBenchmark}
-  PRIVATE
-  ${${targetName}Sources}
-  ${benchmarkFiles}
-)
+  target_sources(${targetNameBenchmark}
+    PRIVATE
+    ${${targetName}Sources}
+    ${benchmarkFiles}
+  )
 
-target_link_libraries(${targetNameBenchmark}
-  PRIVATE
-  ${${targetName}Libraires}
-  fmt::fmt
-  benchmark::benchmark_main
-)
+  target_link_libraries(${targetNameBenchmark}
+    PRIVATE
+    ${${targetName}Libraires}
+    fmt::fmt
+    benchmark::benchmark_main
+  )
+endif(benchmark_FOUND)
 
 # Fuzzer
 # https://llvm.org/docs/LibFuzzer.html
-set(targetNameFuzzer ${targetName}Fuzzer)
+if(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
+  set(targetNameFuzzer ${targetName}Fuzzer)
 
-add_executable(${targetNameFuzzer})
-set_target_properties(${targetNameFuzzer} PROPERTIES FOLDER Fuzzer)
+  add_executable(${targetNameFuzzer})
+  set_target_properties(${targetNameFuzzer} PROPERTIES FOLDER Fuzzer)
 
-target_include_directories(${targetNameFuzzer}
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  ${${targetName}Include}
-)
+  target_include_directories(${targetNameFuzzer}
+    PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${${targetName}Include}
+  )
 
-target_sources(${targetNameFuzzer}
-  PRIVATE
-  ${${targetName}Sources}
-  ${fuzzerFiles}
-)
+  target_sources(${targetNameFuzzer}
+    PRIVATE
+    ${${targetName}Sources}
+    ${fuzzerFiles}
+  )
 
-target_link_libraries(${targetNameFuzzer}
-  PRIVATE
-  ${${targetName}Libraires}
-  fmt::fmt
-  -coverage
-  -fsanitize=fuzzer
-  -stdlib=libstdc++
-)
+  target_link_libraries(${targetNameFuzzer}
+    PRIVATE
+    ${${targetName}Libraires}
+    fmt::fmt
+    -coverage
+    -fsanitize=fuzzer
+    -stdlib=libstdc++
+  )
 
-target_compile_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer -stdlib=libstdc++)
+  target_compile_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer -stdlib=libstdc++)
 
-# Allow short runs during automated testing to see if something new breaks
-set(FUZZ_RUNTIME
-  10
-  CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
+  # Allow short runs during automated testing to see if something new breaks
+  set(FUZZ_RUNTIME
+    10
+    CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
 
-add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
+  add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
+endif(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
 
 # Google/FuzzTest
 # set(targetNameFuzzTest ${targetName}FuzzTest)

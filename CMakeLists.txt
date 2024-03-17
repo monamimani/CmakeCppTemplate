@@ -26,10 +26,9 @@ project(TEMPLATE_PROJECT
   HOMEPAGE_URL "%%TEMPLATE_URL%%"
   LANGUAGES CXX C)
 
-include(CMakeProjectOptions.cmake)
-
 find_package(fmt CONFIG REQUIRED)
 
+include(CMakeProjectOptions.cmake)
 TEMPLATE_PROJECT_declare_options()
 TEMPLATE_PROJECT_global_options()
 TEMPLATE_PROJECT_target_options()
