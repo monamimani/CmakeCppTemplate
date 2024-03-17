@@ -6,7 +6,7 @@ set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_C_COMPILER "clang")
 
 string(APPEND CMAKE_C_FLAGS_INIT " -stdlib=libc++")
-string(APPEND CMAKE_CXX_FLAGS_INIT " -stdlib=libc++ -v")
+string(APPEND CMAKE_CXX_FLAGS_INIT " -stdlib=libc++")
 
 # string(APPEND CMAKE_MODULE_LINKER_FLAGS_INIT " -lc++")
 # string(APPEND CMAKE_SHARED_LINKER_FLAGS_INIT " -lc++")

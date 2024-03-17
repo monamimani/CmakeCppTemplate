@@ -12,6 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 include(CMakePrintHelpers)
 include(CMake/PreventInSourceBuilds.cmake)
 include(CMake/ValidateVcpkgToolchain.cmake)
+include(CMake/GetCPM.cmake)
 
 cmake_print_variables(CMAKE_VERSION)
 

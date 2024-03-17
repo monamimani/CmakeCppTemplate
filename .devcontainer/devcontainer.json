@@ -1,6 +1,6 @@
 {
   "name": "CppDevContainer",
-  "image": "ghcr.io/monamimani-builds/cpp-devcontainer:v3.0.0",
+  "image": "ghcr.io/monamimani-builds/cpp-devcontainer:0dbaa89b04c08beb965310bab22a841b7857d070",
   "runArgs": [
     "--name",
     "cpp-devcontainer",
@@ -24,12 +24,7 @@
       ]
     }
   },
-  "features": {
-    //   "ghcr.io/devcontainers/features/git": {},
-    //   "ghcr.io/devcontainers/features/git-lfs": {},
-    //   "ghcr.io/devcontainers/features/powershell": {},
-    //   "ghcr.io/devcontainers-community/features/llvm": {},
-  },
+  "features": {},
   "postStartCommand": "chmod +x .devcontainer/gitconfig-identity.sh && .devcontainer/gitconfig-identity.sh",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=delegated",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
