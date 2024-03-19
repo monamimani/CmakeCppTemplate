@@ -51,7 +51,7 @@
         "deprecated": false
       },
       "trace": {
-        "mode": "off",
+        "mode": "on",
         "format": "human"
       },
       "cacheVariables": {}
