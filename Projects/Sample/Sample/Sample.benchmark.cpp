@@ -4,7 +4,7 @@
 
 namespace
 {
-void factorial(benchmark::State& state) // cppcheck-suppress [constParameter]
+void factorial(benchmark::State& state) // cppcheck-suppress [constParameterCallback]
 {
   for ([[maybe_unused]] auto _ : state)
   {

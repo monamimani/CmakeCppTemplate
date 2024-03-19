@@ -197,41 +197,41 @@ endif(benchmark_FOUND)
 
 # Fuzzer
 # https://llvm.org/docs/LibFuzzer.html
-# if(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
-set(targetNameFuzzer ${targetName}Fuzzer)
+if(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
+  set(targetNameFuzzer ${targetName}Fuzzer)
 
-add_executable(${targetNameFuzzer})
-set_target_properties(${targetNameFuzzer} PROPERTIES FOLDER Fuzzer)
+  add_executable(${targetNameFuzzer})
+  set_target_properties(${targetNameFuzzer} PROPERTIES FOLDER Fuzzer)
 
-target_include_directories(${targetNameFuzzer}
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  ${${targetName}Include}
-)
+  target_include_directories(${targetNameFuzzer}
+    PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${${targetName}Include}
+  )
 
-target_sources(${targetNameFuzzer}
-  PRIVATE
-  ${${targetName}Sources}
-  ${fuzzerFiles}
-)
+  target_sources(${targetNameFuzzer}
+    PRIVATE
+    ${${targetName}Sources}
+    ${fuzzerFiles}
+  )
 
-target_link_libraries(${targetNameFuzzer}
-  PRIVATE
-  ${${targetName}Libraires}
-  fmt::fmt
-)
+  target_link_libraries(${targetNameFuzzer}
+    PRIVATE
+    ${${targetName}Libraires}
+    fmt::fmt
+  )
 
-target_compile_options(${targetNameFuzzer} PRIVATE -stdlib=libc++ -fsanitize=fuzzer,address,undefined -g)
-target_link_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer,address,undefined -stdlib=libc++ -lstdc++)
+  # -stdlib=libstdc++ -stdlib=libc++
+  target_compile_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer,address,undefined -g)
+  target_link_options(${targetNameFuzzer} PRIVATE -fsanitize=fuzzer,address,undefined)
 
-# Allow short runs during automated testing to see if something new breaks
-set(FUZZ_RUNTIME
-  10
-  CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
+  # Allow short runs during automated testing to see if something new breaks
+  set(FUZZ_RUNTIME
+    10
+    CACHE STRING "Number of seconds to run fuzz tests during ctest run") # Default of 10 seconds
 
-add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
-
-# endif(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
+  add_test(NAME fuzz_tester_run COMMAND ${targetNameFuzzer} -max_total_time=${FUZZ_RUNTIME})
+endif(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
 
 # Google/FuzzTest
 # set(targetNameFuzzTest ${targetName}FuzzTest)

@@ -28,6 +28,7 @@ project(TEMPLATE_PROJECT
 
 find_package(fmt CONFIG REQUIRED)
 
+# set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 include(CMakeProjectOptions.cmake)
 TEMPLATE_PROJECT_declare_options()
 TEMPLATE_PROJECT_global_options()
