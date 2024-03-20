@@ -97,14 +97,13 @@ jobs:
         generator: ${{ matrix.generator }}
 
 
-    - name: CMake Configure
-      shell: pwsh
+    - name: "[Windows] CMake Configure"
       run: |
-        if(${{runner.os == 'Windows' && '$true' || '$false'}})
-        {
-          & { . Scripts\Build\VsEnvironment.ps1; LaunchVsDevShell }
-        }
+        & { . Scripts\Build\VsEnvironment.ps1; LaunchVsDevShell }
+        cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 
+    - name: "[Linux] CMake Configure"
+      run: |
         cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 
     - name: CMake Build
