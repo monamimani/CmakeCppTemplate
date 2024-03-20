@@ -44,6 +44,7 @@ jobs:
 
       - name: Get organization and project name
         run: |
+          printenv
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
 
           echo "DEVCONTAINER_PATH=${GITHUB_REPOSITORY,,}-devcontainer" >> $GITHUB_ENV
@@ -127,7 +128,6 @@ jobs:
 
       - name: Test simple configuration to make sure nothing broke
         run: |
-            printenv
             cmake --preset Linux-Clang-Ninja-Debug-Dev -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             cmake --build --preset Linux-Clang-Ninja-Debug-Dev
 
