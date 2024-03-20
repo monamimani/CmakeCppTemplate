@@ -98,11 +98,13 @@ jobs:
 
 
     - name: "[Windows] CMake Configure"
+      if: runner.os == 'Windows'
       run: |
         & { . Scripts\Build\VsEnvironment.ps1; LaunchVsDevShell }
         cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 
     - name: "[Linux] CMake Configure"
+      if: runner.os == 'Linux'
       run: |
         cmake --preset ${{env.CMAKE_PRESET}} -DGIT_SHA:STRING=${{ github.sha }}
 

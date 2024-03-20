@@ -127,6 +127,7 @@ jobs:
 
       - name: Test simple configuration to make sure nothing broke
         run: |
+            printenv
             cmake --preset Linux-Clang-Ninja-Debug-Dev -D${{ env.PROJECT_NAME }}_BASIC_BUILD_MODE:BOOL=${{ matrix.basic_build_mode }}
             cmake --build --preset Linux-Clang-Ninja-Debug-Dev
 
@@ -147,7 +148,7 @@ jobs:
     name: Renames template when a new name is detected
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/monamimani-builds/cpp-devcontainer"
+      image: "ghcr.io/monamimani-builds/cpp-devcontainer:v4.0.0"
     strategy:
       matrix:
         compiler:
