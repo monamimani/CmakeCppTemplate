@@ -234,29 +234,32 @@ if(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
 endif(TEMPLATE_PROJECT_BUILD_FUZZ_TESTS)
 
 # Google/FuzzTest
-# set(targetNameFuzzTest ${targetName}FuzzTest)
+set(targetNameFuzzTest ${targetName}FuzzTest)
 
-# add_executable(${targetNameFuzzTest})
-# set_target_properties(${targetNameFuzzTest} PROPERTIES FOLDER Fuzzer)
+add_executable(${targetNameFuzzTest})
+set_target_properties(${targetNameFuzzTest} PROPERTIES FOLDER Fuzzer)
 
-# target_include_directories(${targetNameFuzzTest}
-# PUBLIC
-# "${CMAKE_CURRENT_SOURCE_DIR}"
-# ${${targetName}Include}
-# )
+target_include_directories(${targetNameFuzzTest}
+  PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}"
+  ${${targetName}Include}
+)
 
-# target_sources(${targetNameFuzzTest}
-# PRIVATE
-# ${${targetName}Sources}
-# ${fuzztestFiles}
-# )
+target_sources(${targetNameFuzzTest}
+  PRIVATE
+  ${${targetName}Sources}
+  ${fuzztestFiles}
+)
 
-# target_link_libraries(${targetNameFuzzTest}
-# PRIVATE
-# ${${targetName}Libraires}
-# fmt::fmt
-# )
+set_source_files_properties(${targetName}/Sample.fuzztest.cpp PROPERTIES
+  SKIP_LINTING ON
+)
+target_link_libraries(${targetNameFuzzTest}
+  PRIVATE
+  ${${targetName}Libraires}
+  fmt::fmt
+)
 
-# # fuzztest_setup_fuzzing_flags(${targetNameFuzzTest})
-# link_fuzztest(${targetNameFuzzTest})
-# gtest_discover_tests(${targetNameFuzzTest})
+# fuzztest_setup_fuzzing_flags(${targetNameFuzzTest})
+link_fuzztest(${targetNameFuzzTest})
+gtest_discover_tests(${targetNameFuzzTest})

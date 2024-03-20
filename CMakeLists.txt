@@ -6,8 +6,6 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 23)
 endif()
 
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 include(CMakePrintHelpers)
 include(CMake/PreventInSourceBuilds.cmake)

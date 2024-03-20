@@ -5,6 +5,17 @@ if(TEMPLATE_PROJECT_BUILD_BENCHMARKS)
 endif()
 
 if(BUILD_TESTING) # or if(TEMPLATE_PROJECT_BUILD_TESTS)
+  # set(_FIND_COMPONENTS "") # To Silence Gtest dev warning
+  # find_package(GTest CONFIG REQUIRED)
+  # include(GoogleTest)
+  # unset(_FIND_COMPONENTS)
+
+  # if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  # set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  # endif()
+  find_package(Catch2 3 CONFIG REQUIRED)
+  include(Catch)
+
   # block(SCOPE_FOR VARIABLES)
   # unset(CMAKE_CXX_CPPCHECK)
   # unset(CMAKE_CXX_CLANG_TIDY)
@@ -15,15 +26,20 @@ if(BUILD_TESTING) # or if(TEMPLATE_PROJECT_BUILD_TESTS)
   # )
   # FetchContent_MakeAvailable(fuzztest)
   # endblock()
-  set(_FIND_COMPONENTS "") # To Silence Gtest dev warning
-  find_package(GTest CONFIG REQUIRED)
-  include(GoogleTest)
-  unset(_FIND_COMPONENTS)
+  block(SCOPE_FOR VARIABLES)
+  unset(CMAKE_CXX_CPPCHECK)
+  unset(CMAKE_CXX_CLANG_TIDY)
+  CPMAddPackage(
+    NAME fuzztest
+    GITHUB_REPOSITORY google/fuzztest
+    GIT_TAG 951aada2ac48f3a37606718e60c264ed57bdd772
+    GIT_SHALLOW
+    SYSTEM
+    EXCLUDE_FROM_ALL
+  )
+  endblock()
 
   if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
   endif()
-
-  find_package(Catch2 3 CONFIG REQUIRED)
-  include(Catch)
 endif()

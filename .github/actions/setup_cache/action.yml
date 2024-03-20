@@ -25,10 +25,6 @@ runs:
           ~/.cache/pip
           ~/.ccache
           "~/.local/share/powershell/Modules"
-          # ./_Out/build/vcpkg_installed
-          # ${{ env.VCPKG_DOWNLOADS}}
-          # ${{ env.VCPKG_ROOT}}/archives
-          # ${{ env.VCPKG_INSTALLATION_ROOT}}/archives
         key: ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}-${{ inputs.generator }}-${{ inputs.packaging_maintainer_mode }}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./vcpkg.json')}}
         restore-keys: |
           ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}
