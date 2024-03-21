@@ -26,7 +26,7 @@ jobs:
     name: Cleanup after create
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/monamimani-builds/cpp-devcontainer:v4.0.0"
+      image: "ghcr.io/monamimani-builds/cpp-devcontainer:94071a37be2bb82550ca4b43898e49bf398676ef"
 
     strategy:
       matrix:
@@ -148,7 +148,7 @@ jobs:
     name: Renames template when a new name is detected
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/monamimani-builds/cpp-devcontainer:v4.0.0"
+      image: "ghcr.io/monamimani-builds/cpp-devcontainer:94071a37be2bb82550ca4b43898e49bf398676ef"
     strategy:
       matrix:
         compiler:
