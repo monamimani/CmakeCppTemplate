@@ -111,7 +111,7 @@ jobs:
 
     - name: CMake Build
       run: |
-        cmake --build --preset ${{env.CMAKE_PRESET}}
+        cmake --build --preset ${{env.CMAKE_PRESET}} -- -v
 
     # - name: Tests
     #   run: |
