@@ -65,9 +65,7 @@
         "rhs": "Windows"
       },
       "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-windows",
-        "TEMPLATE_PROJECT_ENABLE_CLANG_TIDY": "FALSE",
-        "TEMPLATE_PROJECT_ENABLE_CPPCHECK": "FALSE"
+        "VCPKG_TARGET_TRIPLET": "x64-windows"
       }
     },
     {
@@ -138,7 +136,7 @@
       }
     },
     {
-      "name": "Clang-cl",
+      "name": "ClangCl",
       "hidden": true,
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
@@ -278,6 +276,19 @@
       "cacheVariables": {}
     },
     {
+      "name": "Windows-ClangCl-Ninja-Debug-Dev",
+      "inherits": [
+        "Common",
+        "Windows",
+        "ClangCl",
+        "Ninja",
+        "Dev"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
       "name": "Windows-Msvc-Ninja-Debug-Dev",
       "inherits": [
         "Common",
@@ -355,6 +366,11 @@
     {
       "name": "Windows-Msvc-Vs2022-Debug-Dev",
       "configurePreset": "Windows-Msvc-Vs2022-Debug-Dev",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Windows-ClangCl-Ninja-Debug-Dev",
+      "configurePreset": "Windows-ClangCl-Ninja-Debug-Dev",
       "configuration": "Debug"
     },
     {
