@@ -13,6 +13,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 include(FetchContent)
 include(ProcessorCount)
 ProcessorCount(PROCESSOR_COUNT)
+include(GenerateExportHeader)
 include(CMake/BuildTypes.cmake)
 include(CMake/BuildOutput.cmake)
 

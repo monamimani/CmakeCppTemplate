@@ -1,8 +1,6 @@
 # file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp" "*.cxx" "*.ixx")
 # file(GLOB_RECURSE headers CONFIGURE_DEPENDS "*.h" "*.hpp")
 
-include(GenerateExportHeader)
-
 get_filename_component(targetName ${CMAKE_CURRENT_LIST_DIR} NAME)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)

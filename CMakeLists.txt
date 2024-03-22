@@ -13,7 +13,6 @@ include(CMake/ValidateVcpkgToolchain.cmake)
 include(CMake/GetCPM.cmake)
 
 cmake_print_variables(CMAKE_VERSION)
-
 # cmake_print_variables(CMAKE_MODULE_PATH)
 
 # get_filename_component(WorkspaceName ${CMAKE_SOURCE_DIR} NAME)
@@ -35,6 +34,12 @@ TEMPLATE_PROJECT_target_options()
 # If this project is consumed by another, don't setup tests.
 if(PROJECT_IS_TOP_LEVEL)
   include(CMake/Tests.cmake)
+
+  if(NOT PROCESSOR_COUNT EQUAL 0)
+    set(CTEST_BUILD_FLAGS -j${PROCESSOR_COUNT})
+    set(CTEST_TEST_ARGS ${CTEST_TEST_ARGS} PARALLEL_LEVEL ${PROCESSOR_COUNT})
+  endif()
+
 endif()
 
 # add_subdirectory(Projects)
