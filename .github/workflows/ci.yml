@@ -15,7 +15,7 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ${{matrix.platform.os}}
     container:
-      image:  ${{ matrix.platform.name == 'Linux' && 'ghcr.io/monamimani-builds/cpp-devcontainer:94071a37be2bb82550ca4b43898e49bf398676ef' || '' }}
+      image:  ${{ matrix.platform.name == 'Linux' && 'ghcr.io/monamimani-builds/cpp-devcontainer:v5.0.0' || '' }}
     strategy:
       fail-fast: false
 
@@ -82,7 +82,7 @@ jobs:
 
     - name: CPM Cache
       id: cache-cpm
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: _Out/cpm_sources
         key: ${{ runner.os }}-cpm-${{ hashFiles('**/') }}
